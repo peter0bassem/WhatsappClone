@@ -14,6 +14,8 @@
 		FABC467E2C73EBBF008DA69B /* UpdatesTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC467D2C73EBBF008DA69B /* UpdatesTabScreen.swift */; };
 		FABC46802C73F755008DA69B /* CallTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC467F2C73F755008DA69B /* CallTabScreen.swift */; };
 		FABC46882C73FE48008DA69B /* CommunityTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC46872C73FE48008DA69B /* CommunityTabScreen.swift */; };
+		FABC468A2C740115008DA69B /* ChannelTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC46892C740115008DA69B /* ChannelTabScreen.swift */; };
+		FABC468C2C74040F008DA69B /* ChannelItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC468B2C74040F008DA69B /* ChannelItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		FABC467D2C73EBBF008DA69B /* UpdatesTabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatesTabScreen.swift; sourceTree = "<group>"; };
 		FABC467F2C73F755008DA69B /* CallTabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallTabScreen.swift; sourceTree = "<group>"; };
 		FABC46872C73FE48008DA69B /* CommunityTabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTabScreen.swift; sourceTree = "<group>"; };
+		FABC46892C740115008DA69B /* ChannelTabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTabScreen.swift; sourceTree = "<group>"; };
+		FABC468B2C74040F008DA69B /* ChannelItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 		FABC46832C73FDE3008DA69B /* Channel */ = {
 			isa = PBXGroup;
 			children = (
+				FABC46892C740115008DA69B /* ChannelTabScreen.swift */,
+				FABC468B2C74040F008DA69B /* ChannelItemView.swift */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -197,7 +203,9 @@
 				FABC467E2C73EBBF008DA69B /* UpdatesTabScreen.swift in Sources */,
 				FABC46802C73F755008DA69B /* CallTabScreen.swift in Sources */,
 				FABC46882C73FE48008DA69B /* CommunityTabScreen.swift in Sources */,
+				FABC468A2C740115008DA69B /* ChannelTabScreen.swift in Sources */,
 				FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */,
+				FABC468C2C74040F008DA69B /* ChannelItemView.swift in Sources */,
 				FABC467C2C73E60D008DA69B /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

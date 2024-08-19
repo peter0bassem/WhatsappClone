@@ -33,7 +33,7 @@ struct MainTabView: View {
                     Text(Tab.communities.title)
                 }
             
-            placeholderItemView("Chats")
+            ChannelTabScreen()
                 .tabItem {
                     Image(systemName: Tab.chats.icon)
                     Text(Tab.chats.title)
