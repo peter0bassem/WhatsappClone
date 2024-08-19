@@ -11,6 +11,7 @@
 		FABC46722C73E2D6008DA69B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46712C73E2D6008DA69B /* Assets.xcassets */; };
 		FABC46752C73E2D6008DA69B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46742C73E2D6008DA69B /* Preview Assets.xcassets */; };
 		FABC467C2C73E60D008DA69B /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC467B2C73E60D008DA69B /* MainTabView.swift */; };
+		FABC467E2C73EBBF008DA69B /* UpdatesTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC467D2C73EBBF008DA69B /* UpdatesTabScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		FABC46712C73E2D6008DA69B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FABC46742C73E2D6008DA69B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FABC467B2C73E60D008DA69B /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		FABC467D2C73EBBF008DA69B /* UpdatesTabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatesTabScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 				FABC46712C73E2D6008DA69B /* Assets.xcassets */,
 				FABC46732C73E2D6008DA69B /* Preview Content */,
 				FABC467B2C73E60D008DA69B /* MainTabView.swift */,
+				FABC467D2C73EBBF008DA69B /* UpdatesTabScreen.swift */,
 			);
 			path = Whatsapp;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FABC467E2C73EBBF008DA69B /* UpdatesTabScreen.swift in Sources */,
 				FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */,
 				FABC467C2C73E60D008DA69B /* MainTabView.swift in Sources */,
 			);
