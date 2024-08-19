@@ -16,6 +16,9 @@
 		FABC46882C73FE48008DA69B /* CommunityTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC46872C73FE48008DA69B /* CommunityTabScreen.swift */; };
 		FABC468A2C740115008DA69B /* ChannelTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC46892C740115008DA69B /* ChannelTabScreen.swift */; };
 		FABC468C2C74040F008DA69B /* ChannelItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC468B2C74040F008DA69B /* ChannelItemView.swift */; };
+		FABC468E2C740781008DA69B /* SettingsTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC468D2C740781008DA69B /* SettingsTabScreen.swift */; };
+		FABC46902C74085D008DA69B /* SettingsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC468F2C74085D008DA69B /* SettingsItemView.swift */; };
+		FABC46922C74092B008DA69B /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC46912C74092B008DA69B /* SettingsItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,9 @@
 		FABC46872C73FE48008DA69B /* CommunityTabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityTabScreen.swift; sourceTree = "<group>"; };
 		FABC46892C740115008DA69B /* ChannelTabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTabScreen.swift; sourceTree = "<group>"; };
 		FABC468B2C74040F008DA69B /* ChannelItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelItemView.swift; sourceTree = "<group>"; };
+		FABC468D2C740781008DA69B /* SettingsTabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabScreen.swift; sourceTree = "<group>"; };
+		FABC468F2C74085D008DA69B /* SettingsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemView.swift; sourceTree = "<group>"; };
+		FABC46912C74092B008DA69B /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +99,9 @@
 		FABC46822C73FDD3008DA69B /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				FABC468D2C740781008DA69B /* SettingsTabScreen.swift */,
+				FABC468F2C74085D008DA69B /* SettingsItemView.swift */,
+				FABC46912C74092B008DA69B /* SettingsItem.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -200,13 +209,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FABC468E2C740781008DA69B /* SettingsTabScreen.swift in Sources */,
 				FABC467E2C73EBBF008DA69B /* UpdatesTabScreen.swift in Sources */,
 				FABC46802C73F755008DA69B /* CallTabScreen.swift in Sources */,
 				FABC46882C73FE48008DA69B /* CommunityTabScreen.swift in Sources */,
 				FABC468A2C740115008DA69B /* ChannelTabScreen.swift in Sources */,
 				FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */,
+				FABC46902C74085D008DA69B /* SettingsItemView.swift in Sources */,
 				FABC468C2C74040F008DA69B /* ChannelItemView.swift in Sources */,
 				FABC467C2C73E60D008DA69B /* MainTabView.swift in Sources */,
+				FABC46922C74092B008DA69B /* SettingsItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
