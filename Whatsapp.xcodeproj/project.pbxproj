@@ -8,17 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */; };
-		FABC46702C73E2D4008DA69B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC466F2C73E2D4008DA69B /* ContentView.swift */; };
 		FABC46722C73E2D6008DA69B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46712C73E2D6008DA69B /* Assets.xcassets */; };
 		FABC46752C73E2D6008DA69B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46742C73E2D6008DA69B /* Preview Assets.xcassets */; };
+		FABC467C2C73E60D008DA69B /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC467B2C73E60D008DA69B /* MainTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FABC466A2C73E2D4008DA69B /* Whatsapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whatsapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsappApp.swift; sourceTree = "<group>"; };
-		FABC466F2C73E2D4008DA69B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FABC46712C73E2D6008DA69B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FABC46742C73E2D6008DA69B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FABC467B2C73E60D008DA69B /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,9 +52,9 @@
 			isa = PBXGroup;
 			children = (
 				FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */,
-				FABC466F2C73E2D4008DA69B /* ContentView.swift */,
 				FABC46712C73E2D6008DA69B /* Assets.xcassets */,
 				FABC46732C73E2D6008DA69B /* Preview Content */,
+				FABC467B2C73E60D008DA69B /* MainTabView.swift */,
 			);
 			path = Whatsapp;
 			sourceTree = "<group>";
@@ -137,8 +137,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FABC46702C73E2D4008DA69B /* ContentView.swift in Sources */,
 				FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */,
+				FABC467C2C73E60D008DA69B /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
