@@ -19,6 +19,8 @@
 		FABC468E2C740781008DA69B /* SettingsTabScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC468D2C740781008DA69B /* SettingsTabScreen.swift */; };
 		FABC46902C74085D008DA69B /* SettingsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC468F2C74085D008DA69B /* SettingsItemView.swift */; };
 		FABC46922C74092B008DA69B /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC46912C74092B008DA69B /* SettingsItem.swift */; };
+		FABC46952C740EB8008DA69B /* ChatRoomScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC46942C740EB8008DA69B /* ChatRoomScreen.swift */; };
+		FABC46972C7410A8008DA69B /* TextInputAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC46962C7410A8008DA69B /* TextInputAreaView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		FABC468D2C740781008DA69B /* SettingsTabScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabScreen.swift; sourceTree = "<group>"; };
 		FABC468F2C74085D008DA69B /* SettingsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemView.swift; sourceTree = "<group>"; };
 		FABC46912C74092B008DA69B /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
+		FABC46942C740EB8008DA69B /* ChatRoomScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomScreen.swift; sourceTree = "<group>"; };
+		FABC46962C7410A8008DA69B /* TextInputAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputAreaView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,7 @@
 				FABC46852C73FDF5008DA69B /* Calls */,
 				FABC46842C73FDE7008DA69B /* Community */,
 				FABC46832C73FDE3008DA69B /* Channel */,
+				FABC46932C740EA9008DA69B /* Chat */,
 				FABC46822C73FDD3008DA69B /* Settings */,
 			);
 			path = Screens;
@@ -137,6 +142,15 @@
 				FABC467D2C73EBBF008DA69B /* UpdatesTabScreen.swift */,
 			);
 			path = Updates;
+			sourceTree = "<group>";
+		};
+		FABC46932C740EA9008DA69B /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				FABC46942C740EB8008DA69B /* ChatRoomScreen.swift */,
+				FABC46962C7410A8008DA69B /* TextInputAreaView.swift */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,10 +229,12 @@
 				FABC46882C73FE48008DA69B /* CommunityTabScreen.swift in Sources */,
 				FABC468A2C740115008DA69B /* ChannelTabScreen.swift in Sources */,
 				FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */,
+				FABC46952C740EB8008DA69B /* ChatRoomScreen.swift in Sources */,
 				FABC46902C74085D008DA69B /* SettingsItemView.swift in Sources */,
 				FABC468C2C74040F008DA69B /* ChannelItemView.swift in Sources */,
 				FABC467C2C73E60D008DA69B /* MainTabView.swift in Sources */,
 				FABC46922C74092B008DA69B /* SettingsItem.swift in Sources */,
+				FABC46972C7410A8008DA69B /* TextInputAreaView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
