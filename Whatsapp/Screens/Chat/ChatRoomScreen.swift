@@ -12,19 +12,16 @@ struct ChatRoomScreen: View {
         ScrollView {
             LazyVStack {
                 ForEach(0..<12) { _ in
-                    Text("Placeholder")
-                        .font(.largeTitle)
-                        .bold()
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 200)
-                        .background(Color.gray.opacity(0.1))
+                    BubbleTextView(item: .sentPlaceholder)
+                    BubbleTextView(item: .receivedPlaceholder)
                 }
             }
-            
-            .toolbar {
-                leadingNavItems()
-                trailingNavItems()
-            }
+            .padding(.horizontal, 10)
+        }
+        .background(Color.gray.opacity(0.1))
+        .toolbar {
+            leadingNavItems()
+            trailingNavItems()
         }
         .scrollIndicators(.hidden)
         .safeAreaInset(edge: .bottom) {

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA8045ED2C7523DB005EB72B /* MessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045EC2C7523DB005EB72B /* MessageItem.swift */; };
+		FA8045EF2C7524F1005EB72B /* BubbleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */; };
+		FA8045F12C753391005EB72B /* BubbleTailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045F02C753390005EB72B /* BubbleTailView.swift */; };
+		FA8045F42C753510005EB72B /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045F32C753510005EB72B /* CustomModifiers.swift */; };
 		FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */; };
 		FABC46722C73E2D6008DA69B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46712C73E2D6008DA69B /* Assets.xcassets */; };
 		FABC46752C73E2D6008DA69B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46742C73E2D6008DA69B /* Preview Assets.xcassets */; };
@@ -21,9 +25,15 @@
 		FABC46922C74092B008DA69B /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC46912C74092B008DA69B /* SettingsItem.swift */; };
 		FABC46952C740EB8008DA69B /* ChatRoomScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC46942C740EB8008DA69B /* ChatRoomScreen.swift */; };
 		FABC46972C7410A8008DA69B /* TextInputAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC46962C7410A8008DA69B /* TextInputAreaView.swift */; };
+		FABC46992C74D95E008DA69B /* MessageListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC46982C74D95E008DA69B /* MessageListViewController.swift */; };
+		FABC469B2C74DB22008DA69B /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC469A2C74DB22008DA69B /* MessageListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA8045EC2C7523DB005EB72B /* MessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageItem.swift; sourceTree = "<group>"; };
+		FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTextView.swift; sourceTree = "<group>"; };
+		FA8045F02C753390005EB72B /* BubbleTailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTailView.swift; sourceTree = "<group>"; };
+		FA8045F32C753510005EB72B /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
 		FABC466A2C73E2D4008DA69B /* Whatsapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whatsapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsappApp.swift; sourceTree = "<group>"; };
 		FABC46712C73E2D6008DA69B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -39,6 +49,8 @@
 		FABC46912C74092B008DA69B /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
 		FABC46942C740EB8008DA69B /* ChatRoomScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomScreen.swift; sourceTree = "<group>"; };
 		FABC46962C7410A8008DA69B /* TextInputAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputAreaView.swift; sourceTree = "<group>"; };
+		FABC46982C74D95E008DA69B /* MessageListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListViewController.swift; sourceTree = "<group>"; };
+		FABC469A2C74DB22008DA69B /* MessageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +64,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA8045EB2C7523CE005EB72B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FA8045EC2C7523DB005EB72B /* MessageItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FA8045F22C7534F9005EB72B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FA8045F32C753510005EB72B /* CustomModifiers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		FABC46612C73E2D4008DA69B = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +99,8 @@
 		FABC466C2C73E2D4008DA69B /* Whatsapp */ = {
 			isa = PBXGroup;
 			children = (
+				FA8045F22C7534F9005EB72B /* Helpers */,
+				FA8045EB2C7523CE005EB72B /* Models */,
 				FABC46812C73FDCA008DA69B /* Screens */,
 				FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */,
 				FABC46712C73E2D6008DA69B /* Assets.xcassets */,
@@ -149,6 +179,10 @@
 			children = (
 				FABC46942C740EB8008DA69B /* ChatRoomScreen.swift */,
 				FABC46962C7410A8008DA69B /* TextInputAreaView.swift */,
+				FABC46982C74D95E008DA69B /* MessageListViewController.swift */,
+				FABC469A2C74DB22008DA69B /* MessageListView.swift */,
+				FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */,
+				FA8045F02C753390005EB72B /* BubbleTailView.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -229,12 +263,18 @@
 				FABC46882C73FE48008DA69B /* CommunityTabScreen.swift in Sources */,
 				FABC468A2C740115008DA69B /* ChannelTabScreen.swift in Sources */,
 				FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */,
+				FA8045F12C753391005EB72B /* BubbleTailView.swift in Sources */,
 				FABC46952C740EB8008DA69B /* ChatRoomScreen.swift in Sources */,
 				FABC46902C74085D008DA69B /* SettingsItemView.swift in Sources */,
+				FABC469B2C74DB22008DA69B /* MessageListView.swift in Sources */,
 				FABC468C2C74040F008DA69B /* ChannelItemView.swift in Sources */,
 				FABC467C2C73E60D008DA69B /* MainTabView.swift in Sources */,
+				FA8045EF2C7524F1005EB72B /* BubbleTextView.swift in Sources */,
+				FA8045ED2C7523DB005EB72B /* MessageItem.swift in Sources */,
 				FABC46922C74092B008DA69B /* SettingsItem.swift in Sources */,
+				FA8045F42C753510005EB72B /* CustomModifiers.swift in Sources */,
 				FABC46972C7410A8008DA69B /* TextInputAreaView.swift in Sources */,
+				FABC46992C74D95E008DA69B /* MessageListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
