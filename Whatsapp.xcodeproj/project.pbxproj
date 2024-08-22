@@ -14,6 +14,14 @@
 		FA121B972C77AF9600B2E5DC /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = FA121B962C77AF9600B2E5DC /* SwiftUIIntrospect */; };
 		FA121B9A2C77B1D100B2E5DC /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121B992C77B1D100B2E5DC /* FirebaseManager.swift */; };
 		FA121B9C2C77B29100B2E5DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA121B9B2C77B29100B2E5DC /* GoogleService-Info.plist */; };
+		FA121BA12C77B40300B2E5DC /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BA02C77B40300B2E5DC /* LoginScreen.swift */; };
+		FA121BA32C77B4A500B2E5DC /* AuthHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BA22C77B4A500B2E5DC /* AuthHeaderView.swift */; };
+		FA121BAC2C77B7B600B2E5DC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BAB2C77B7B600B2E5DC /* Constants.swift */; };
+		FA121BAE2C77B9E400B2E5DC /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BAD2C77B9E400B2E5DC /* AuthTextField.swift */; };
+		FA121BB02C77C24500B2E5DC /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BAF2C77C24500B2E5DC /* AuthButton.swift */; };
+		FA121BB22C77CBB700B2E5DC /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BB12C77CBB700B2E5DC /* SignUpScreen.swift */; };
+		FA121BB42C77CF2900B2E5DC /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BB32C77CF2900B2E5DC /* AuthViewModel.swift */; };
+		FA121BB72C77D25A00B2E5DC /* AuthProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BB62C77D25A00B2E5DC /* AuthProviderService.swift */; };
 		FA8045ED2C7523DB005EB72B /* MessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045EC2C7523DB005EB72B /* MessageItem.swift */; };
 		FA8045EF2C7524F1005EB72B /* BubbleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */; };
 		FA8045F12C753391005EB72B /* BubbleTailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045F02C753390005EB72B /* BubbleTailView.swift */; };
@@ -54,6 +62,14 @@
 /* Begin PBXFileReference section */
 		FA121B992C77B1D100B2E5DC /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		FA121B9B2C77B29100B2E5DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FA121BA02C77B40300B2E5DC /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		FA121BA22C77B4A500B2E5DC /* AuthHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHeaderView.swift; sourceTree = "<group>"; };
+		FA121BAB2C77B7B600B2E5DC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FA121BAD2C77B9E400B2E5DC /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
+		FA121BAF2C77C24500B2E5DC /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
+		FA121BB12C77CBB700B2E5DC /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
+		FA121BB32C77CF2900B2E5DC /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		FA121BB62C77D25A00B2E5DC /* AuthProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProviderService.swift; sourceTree = "<group>"; };
 		FA8045EC2C7523DB005EB72B /* MessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageItem.swift; sourceTree = "<group>"; };
 		FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTextView.swift; sourceTree = "<group>"; };
 		FA8045F02C753390005EB72B /* BubbleTailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTailView.swift; sourceTree = "<group>"; };
@@ -103,6 +119,58 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		FA121B9D2C77B3EE00B2E5DC /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				FA121BA22C77B4A500B2E5DC /* AuthHeaderView.swift */,
+				FA121B9E2C77B3F300B2E5DC /* Login */,
+				FA121B9F2C77B3F600B2E5DC /* Register */,
+				FA121BB32C77CF2900B2E5DC /* AuthViewModel.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		FA121B9E2C77B3F300B2E5DC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				FA121BA02C77B40300B2E5DC /* LoginScreen.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		FA121B9F2C77B3F600B2E5DC /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				FA121BB12C77CBB700B2E5DC /* SignUpScreen.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		FA121BA72C77B74B00B2E5DC /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				FA121BAD2C77B9E400B2E5DC /* AuthTextField.swift */,
+				FA121BAF2C77C24500B2E5DC /* AuthButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		FA121BAA2C77B7AE00B2E5DC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FA121BAB2C77B7B600B2E5DC /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		FA121BB52C77D25000B2E5DC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FA121BB62C77D25A00B2E5DC /* AuthProviderService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		FA8045EB2C7523CE005EB72B /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +206,9 @@
 		FABC466C2C73E2D4008DA69B /* Whatsapp */ = {
 			isa = PBXGroup;
 			children = (
+				FA121BB52C77D25000B2E5DC /* Services */,
+				FA121BAA2C77B7AE00B2E5DC /* Utils */,
+				FA121BA72C77B74B00B2E5DC /* Components */,
 				FA121B982C77B1C700B2E5DC /* Managers */,
 				FA8045F22C7534F9005EB72B /* Helpers */,
 				FA8045EB2C7523CE005EB72B /* Models */,
@@ -162,6 +233,7 @@
 		FABC46812C73FDCA008DA69B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				FA121B9D2C77B3EE00B2E5DC /* Auth */,
 				FABC46862C73FDF8008DA69B /* Updates */,
 				FABC46852C73FDF5008DA69B /* Calls */,
 				FABC46842C73FDE7008DA69B /* Community */,
@@ -313,15 +385,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA121BAC2C77B7B600B2E5DC /* Constants.swift in Sources */,
+				FA121BB02C77C24500B2E5DC /* AuthButton.swift in Sources */,
 				FABC468E2C740781008DA69B /* SettingsTabScreen.swift in Sources */,
 				FABC467E2C73EBBF008DA69B /* UpdatesTabScreen.swift in Sources */,
 				FABC46802C73F755008DA69B /* CallTabScreen.swift in Sources */,
 				FABC46882C73FE48008DA69B /* CommunityTabScreen.swift in Sources */,
 				FABC468A2C740115008DA69B /* ChannelTabScreen.swift in Sources */,
+				FA121BAE2C77B9E400B2E5DC /* AuthTextField.swift in Sources */,
 				FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */,
 				FA8045F12C753391005EB72B /* BubbleTailView.swift in Sources */,
 				FABC46952C740EB8008DA69B /* ChatRoomScreen.swift in Sources */,
+				FA121BB22C77CBB700B2E5DC /* SignUpScreen.swift in Sources */,
+				FA121BB72C77D25A00B2E5DC /* AuthProviderService.swift in Sources */,
 				FABC46902C74085D008DA69B /* SettingsItemView.swift in Sources */,
+				FA121BA12C77B40300B2E5DC /* LoginScreen.swift in Sources */,
 				FA121B9A2C77B1D100B2E5DC /* FirebaseManager.swift in Sources */,
 				FA8045F62C761DB5005EB72B /* BubbleImageView.swift in Sources */,
 				FABC469B2C74DB22008DA69B /* MessageListView.swift in Sources */,
@@ -332,6 +410,8 @@
 				FABC46922C74092B008DA69B /* SettingsItem.swift in Sources */,
 				FA8045F42C753510005EB72B /* CustomModifiers.swift in Sources */,
 				FA8045F82C778221005EB72B /* BubbleAudioView.swift in Sources */,
+				FA121BB42C77CF2900B2E5DC /* AuthViewModel.swift in Sources */,
+				FA121BA32C77B4A500B2E5DC /* AuthHeaderView.swift in Sources */,
 				FABC46972C7410A8008DA69B /* TextInputAreaView.swift in Sources */,
 				FABC46992C74D95E008DA69B /* MessageListViewController.swift in Sources */,
 			);
