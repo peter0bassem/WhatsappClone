@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIIntrospect
 
 struct BubbleAudioView: View {
     let item: MessageItem
@@ -34,7 +35,10 @@ struct BubbleAudioView: View {
                 VStack(alignment: .leading) {
                     Spacer()
                     Slider(value: $sliderValue, in: sliderRange)
-                        .controlSize(.mini)
+                        .introspect(.slider, on: .iOS(.v17)) { slider in
+                            let image = UIImage(systemName: "circle.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .small))
+                            slider.setThumbImage(image, for: .normal)
+                        }
                         .tint(.gray)
                     Text("04:00")
                         .foregroundStyle(.gray)
