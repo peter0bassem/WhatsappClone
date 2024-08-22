@@ -15,7 +15,7 @@ struct BubbleImageView: View {
             HStack {
                 if item.direction == .sent { shareButton() }
                 
-                messageTextView()
+                imageAndMessageTextView()
                     .shadow(color: Color(.systemGray3).opacity(0.1), radius: 5, x: 0.0, y: 20.0)
                     .frame(width: UIScreen.main.bounds.width * 0.70, alignment: .leading)
                     .background(item.backgroundColor)
@@ -31,7 +31,7 @@ struct BubbleImageView: View {
         }
     }
     
-    private func messageTextView() -> some View {
+    private func imageAndMessageTextView() -> some View {
         VStack(alignment: item.horizontalAlignment, spacing: -15) { // spacing between text and time
             
             VStack(alignment: .leading, spacing: 0) { // image and text views
@@ -65,8 +65,7 @@ struct BubbleImageView: View {
     }
     
     private func rectReader() -> some View {
-        return GeometryReader { (geometry) -> Color in
-            let imageSize = geometry.size
+        return GeometryReader { _ -> Color in
             return .clear
         }
     }

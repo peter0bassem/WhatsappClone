@@ -21,6 +21,7 @@ enum MessageType: Equatable {
     case text(message: String)
     case photo
     case video
+    case audio
 }
 
 struct MessageItem: Identifiable {
@@ -42,7 +43,9 @@ struct MessageItem: Identifiable {
     static let stubMessages: [MessageItem] = [
         .init(text: "Hello, World! How are you doing?", type: .text(message: ""), direction: .sent),
         .init(text: "Check out this Photo!", type: .photo, direction: .received),
-        .init(text: "Play this video", type: .video, direction: .sent)
+        .init(text: "Play this video", type: .video, direction: .sent),
+        .init(text: "Listen to this audio", type: .audio, direction: .sent),
+        .init(text: "", type: .audio, direction: .received),
     ]
 
     static let sentPlaceholder = MessageItem(text: "Holy Spagetti, this is a dummy text for multi-line text view testing purpose.", type: .text(message: ""), direction: .sent)

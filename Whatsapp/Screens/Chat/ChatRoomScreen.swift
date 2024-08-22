@@ -17,6 +17,8 @@ struct ChatRoomScreen: View {
                         BubbleTextView(item: messageItem)
                     case .photo, .video:
                         BubbleImageView(item: messageItem)
+                    case .audio:
+                        BubbleAudioView(item: messageItem)
                     }
                 }
             }
