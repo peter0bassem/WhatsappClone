@@ -15,7 +15,7 @@ struct BubbleTextView: View {
                 Spacer()
             }
             VStack(alignment: item.horizontalAlignment, spacing: -20) { // spacing between text and time
-                Text(item.direction == .sent ? "Hi John, it's been so long since we last catch up, how are you doing?" : "Hey!! Wanna meet for a dinner tonight?")
+                Text(item.text/*item.direction == .sent ? "Hi John, it's been so long since we last catch up, how are you doing?" : "Hey!! Wanna meet for a dinner tonight?"*/)
                     .padding(10) // padding between text and edges
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                 
@@ -27,7 +27,7 @@ struct BubbleTextView: View {
             .shadow(color: Color(.systemGray3).opacity(0.1), radius: 5, x: 0.0, y: 20.0)
             .frame(width: UIScreen.main.bounds.width * 0.70, alignment: .leading)
             .background(item.backgroundColor)
-            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
             .applyTail(direction: item.direction)
             
             if item.direction == .received {
@@ -37,9 +37,9 @@ struct BubbleTextView: View {
     }
     
     private func timestampView() -> some View {
-        HStack(spacing: 3) {
+        HStack(spacing: 2) {
             Text("3:05 PM")
-                .font(.system(size: 13))
+                .font(.caption2/*.system(size: 13)*/)
                 .foregroundStyle(.gray)
                 .frame(maxWidth: .infinity, alignment: .bottomTrailing)
             
@@ -57,9 +57,12 @@ struct BubbleTextView: View {
 
 #Preview {
     ScrollView {
-        BubbleTextView(item: .sentPlaceholder)
-        BubbleTextView(item: .receivedPlaceholder)
-        BubbleTextView(item: .sentPlaceholder)
+        VStack {
+            BubbleTextView(item: .sentPlaceholder)
+            BubbleTextView(item: .receivedPlaceholder)
+            BubbleTextView(item: .sentPlaceholder)
+        }
+        .padding(.horizontal, 10)
     }
     .frame(maxWidth: .infinity)
     .background(Color.gray.opacity(0.5))

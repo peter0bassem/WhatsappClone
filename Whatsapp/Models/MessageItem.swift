@@ -17,9 +17,16 @@ enum MessageDirection {
     
 }
 
+enum MessageType: Equatable {
+    case text(message: String)
+    case photo
+    case video
+}
+
 struct MessageItem: Identifiable {
     let id = UUID().uuidString
     let text: String
+    let type: MessageType
     let direction: MessageDirection
     
     var backgroundColor: Color {
@@ -31,7 +38,13 @@ struct MessageItem: Identifiable {
     var horizontalAlignment: HorizontalAlignment {
         return direction == .received ? .leading : .trailing
     }
+    
+    static let stubMessages: [MessageItem] = [
+        .init(text: "Hello, World! How are you doing?", type: .text(message: ""), direction: .sent),
+        .init(text: "Check out this Photo!", type: .photo, direction: .received),
+        .init(text: "Play this video", type: .video, direction: .sent)
+    ]
 
-    static let sentPlaceholder = MessageItem(text: "Holy Spagetti", direction: .sent)
-    static let receivedPlaceholder = MessageItem(text: "Hey dude, whats up!", direction: .received)
+    static let sentPlaceholder = MessageItem(text: "Holy Spagetti, this is a dummy text for multi-line text view testing purpose.", type: .text(message: ""), direction: .sent)
+    static let receivedPlaceholder = MessageItem(text: "", type: .text(message: ""), direction: .received) //Hey dude, whats up!
 }

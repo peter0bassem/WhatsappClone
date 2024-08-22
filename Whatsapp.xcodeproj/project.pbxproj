@@ -11,6 +11,7 @@
 		FA8045EF2C7524F1005EB72B /* BubbleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */; };
 		FA8045F12C753391005EB72B /* BubbleTailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045F02C753390005EB72B /* BubbleTailView.swift */; };
 		FA8045F42C753510005EB72B /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045F32C753510005EB72B /* CustomModifiers.swift */; };
+		FA8045F62C761DB5005EB72B /* BubbleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045F52C761DB5005EB72B /* BubbleImageView.swift */; };
 		FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */; };
 		FABC46722C73E2D6008DA69B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46712C73E2D6008DA69B /* Assets.xcassets */; };
 		FABC46752C73E2D6008DA69B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46742C73E2D6008DA69B /* Preview Assets.xcassets */; };
@@ -34,6 +35,7 @@
 		FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTextView.swift; sourceTree = "<group>"; };
 		FA8045F02C753390005EB72B /* BubbleTailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTailView.swift; sourceTree = "<group>"; };
 		FA8045F32C753510005EB72B /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
+		FA8045F52C761DB5005EB72B /* BubbleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleImageView.swift; sourceTree = "<group>"; };
 		FABC466A2C73E2D4008DA69B /* Whatsapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whatsapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsappApp.swift; sourceTree = "<group>"; };
 		FABC46712C73E2D6008DA69B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				FABC46982C74D95E008DA69B /* MessageListViewController.swift */,
 				FABC469A2C74DB22008DA69B /* MessageListView.swift */,
 				FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */,
+				FA8045F52C761DB5005EB72B /* BubbleImageView.swift */,
 				FA8045F02C753390005EB72B /* BubbleTailView.swift */,
 			);
 			path = Chat;
@@ -266,6 +269,7 @@
 				FA8045F12C753391005EB72B /* BubbleTailView.swift in Sources */,
 				FABC46952C740EB8008DA69B /* ChatRoomScreen.swift in Sources */,
 				FABC46902C74085D008DA69B /* SettingsItemView.swift in Sources */,
+				FA8045F62C761DB5005EB72B /* BubbleImageView.swift in Sources */,
 				FABC469B2C74DB22008DA69B /* MessageListView.swift in Sources */,
 				FABC468C2C74040F008DA69B /* ChannelItemView.swift in Sources */,
 				FABC467C2C73E60D008DA69B /* MainTabView.swift in Sources */,

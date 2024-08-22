@@ -11,13 +11,19 @@ struct ChatRoomScreen: View {
     var body: some View {
         ScrollView {
             LazyVStack {
-                ForEach(0..<12) { _ in
-                    BubbleTextView(item: .sentPlaceholder)
-                    BubbleTextView(item: .receivedPlaceholder)
+                ForEach(MessageItem.stubMessages) { messageItem in
+                    switch messageItem.type {
+                    case .text(let message):
+                        BubbleTextView(item: messageItem)
+                    case .photo, .video:
+                        BubbleImageView(item: messageItem)
+                    }
                 }
             }
             .padding(.horizontal, 10)
         }
+        .padding(.top, 10)
+        .navigationBarTitleDisplayMode(.inline)
         .background(Color.gray.opacity(0.1))
         .toolbar {
             leadingNavItems()
