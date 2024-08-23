@@ -21,6 +21,7 @@ struct GroupPartnerPickerScreen: View {
             Section {
                 ForEach(User.placeholders) { item in
                     chatPartnerRowView(item)
+                        .contentShape(Rectangle())
                         .onTapGesture {
                             chatPartnerPickerViewModel.handleItemSelection(item)
                         }
