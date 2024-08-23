@@ -35,11 +35,15 @@ enum ChatPartnerPickerOptions: String, CaseIterable, Identifiable {
 struct ChatPartnerPickerScreen: View {
     @State private var searchText: String = ""
     @Environment(\.dismiss) private var dismsiss
+    @StateObject private var chatPartnerPickerViewModel = ChatPartnerPickerViewModel()
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $chatPartnerPickerViewModel.navStack) {
             List {
                 ForEach(ChatPartnerPickerOptions.allCases) { item in
                     HeaderItemView(item: item)
+                        .onTapGesture {
+                            chatPartnerPickerViewModel.navStack.append(.groupParnterPicker)
+                        }
                 }
                 
                 Section {
@@ -54,9 +58,12 @@ struct ChatPartnerPickerScreen: View {
             .scrollIndicators(.hidden)
             .navigationTitle("New Chats")
             .navigationBarTitleDisplayMode(.inline)
-            .searchable(text: $searchText, prompt: "Search name or number")
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search name or number")
             .toolbar {
                 createTrailingNavBarItem()
+            }
+            .navigationDestination(for: ChannelCreationRoute.self) { route in
+                destinationView(for: route)
             }
         }
     }
@@ -75,6 +82,16 @@ struct ChatPartnerPickerScreen: View {
                     .background(Color(.systemGray5))
                     .clipShape(Circle())
             })
+        }
+    }
+    
+    @ViewBuilder
+    private func destinationView(for route: ChannelCreationRoute) -> some View {
+        switch route {
+        case .groupParnterPicker:
+            GroupPartnerPickerScreen(chatPartnerPickerViewModel: chatPartnerPickerViewModel)
+        case .setupGroupChat:
+            GroupSetupScreen(chatPartnerPickerViewModel: chatPartnerPickerViewModel)
         }
     }
 }

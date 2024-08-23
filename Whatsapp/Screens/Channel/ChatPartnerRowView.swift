@@ -7,8 +7,15 @@
 
 import SwiftUI
 
-struct ChatPartnerRowView: View {
+struct ChatPartnerRowView<Content: View>: View {
     let user: User
+    private let trailingItems: Content
+    
+    init(user: User, @ViewBuilder trailingItems: () -> Content = { EmptyView() }) {
+        self.user = user
+        self.trailingItems = trailingItems()
+    }
+    
     var body: some View {
         HStack {
             Circle()
@@ -22,6 +29,7 @@ struct ChatPartnerRowView: View {
                     .font(.caption)
                     .foregroundStyle(.gray)
             }
+            trailingItems
         }
     }
 }
