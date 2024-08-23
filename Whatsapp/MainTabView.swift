@@ -6,12 +6,9 @@
 //
 
 import SwiftUI
+import SwiftUIIntrospect
 
 struct MainTabView: View {
-    
-    init() {
-        makeTabBarOpaque()
-    }
     
     var body: some View {
         TabView {
@@ -45,13 +42,12 @@ struct MainTabView: View {
                     Text(Tab.settings.title)
                 }
         }
-    }
-    
-    private func makeTabBarOpaque() {
-        let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().scrollEdgeAppearance = appearance
+        .introspect(.tabView, on: .iOS(.v17)) { tabBar in
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            tabBar.tabBar.standardAppearance = appearance
+            tabBar.tabBar.scrollEdgeAppearance = appearance
+        }
     }
 }
 

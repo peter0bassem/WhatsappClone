@@ -9,57 +9,63 @@ import Foundation
 import Combine
 
 enum AuthState {
-    case pending, loggedIn, loggedOut
+    case pending, loggedIn(userViewModel: UserViewModel), loggedOut
 }
 
-protocol AuthProviderService {
+protocol AuthProviderService: Actor {
     static var shared: AuthProviderService { get }
     var authState: CurrentValueSubject<AuthState, Never> { get }
-    func login(email: String, password: String) async throws
+    func login(loginRequest: LoginRequest) async throws
     func createAccount(for username: String, email: String, password: String) async throws
     func autoLogin() async
     func logout() async throws
 }
 
-final class AuthProviderServiceImp: AuthProviderService {
+final actor AuthProviderServiceImp: AuthProviderService {
     
     static let shared: AuthProviderService = AuthProviderServiceImp()
     
     var authState = CurrentValueSubject<AuthState, Never>(.pending)
     
-    private init() { }
+    private init() { 
+        Task {
+            await autoLogin()
+        }
+    }
     
-    func login(email: String, password: String) async throws {
-        
+    func login(loginRequest: LoginRequest) async throws {
+        if let user = try await FirebaseManager.loginUser(loginRequest: loginRequest) {
+            let userViewModel = UserViewModel()
+            userViewModel.user = user
+            self.authState.send(.loggedIn(userViewModel: userViewModel))
+        } else {
+            self.authState.send(.loggedOut)
+        }
     }
     
     func createAccount(for username: String, email: String, password: String) async throws {
-        try await FirebaseManager.createAccount(for: username, email: email, password: password)
+        guard let user = try await FirebaseManager.createAccount(for: username, email: email, password: password) else { return }
+        let userViewModel = UserViewModel()
+        userViewModel.user = user
+        self.authState.send(.loggedIn(userViewModel: userViewModel))
     }
     
     func autoLogin() async {
-        
+        if await !FirebaseManager.checkUserLoggedIn() {
+            self.authState.send(.loggedOut)
+        } else {
+            if let loggedInUser = await FirebaseManager.fetchCurrentUserInfo() {
+                let userViewModel = UserViewModel()
+                userViewModel.user = loggedInUser
+                self.authState.send(.loggedIn(userViewModel: userViewModel))
+            } else {
+                self.authState.send(.loggedOut)
+            }
+        }
     }
     
     func logout() async throws {
-        
-    }
-    
-    
-}
-
-struct User: Identifiable, Hashable, Codable {
-    let uid: String
-    let username: String
-    let email: String
-    var bio: String? = nil
-    var profileImageUrl: String? = nil
-    
-    var id: String {
-        uid
-    }
-    
-    var bioUnwrapped: String {
-        return bio ?? "Hey There! I'm using WhatsApp."
+        try await FirebaseManager.logoutUser()
+        self.authState.send(.loggedOut)
     }
 }

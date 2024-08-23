@@ -22,7 +22,7 @@ struct WhatsappApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LoginScreen()
+            RootScreen()
         }
     }
 }

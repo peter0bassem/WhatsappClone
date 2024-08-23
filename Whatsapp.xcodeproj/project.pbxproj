@@ -22,6 +22,12 @@
 		FA121BB22C77CBB700B2E5DC /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BB12C77CBB700B2E5DC /* SignUpScreen.swift */; };
 		FA121BB42C77CF2900B2E5DC /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BB32C77CF2900B2E5DC /* AuthViewModel.swift */; };
 		FA121BB72C77D25A00B2E5DC /* AuthProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BB62C77D25A00B2E5DC /* AuthProviderService.swift */; };
+		FA121BBA2C77F07A00B2E5DC /* CodableFirebase in Frameworks */ = {isa = PBXBuildFile; productRef = FA121BB92C77F07A00B2E5DC /* CodableFirebase */; };
+		FA121BBD2C77F5E300B2E5DC /* RootScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BBC2C77F5E300B2E5DC /* RootScreen.swift */; };
+		FA121BBF2C77F5FB00B2E5DC /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BBE2C77F5FB00B2E5DC /* RootViewModel.swift */; };
+		FA121BC12C77F99300B2E5DC /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BC02C77F99300B2E5DC /* SettingsViewModel.swift */; };
+		FA121BC32C77FBFE00B2E5DC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BC22C77FBFE00B2E5DC /* User.swift */; };
+		FA121BC52C77FEE500B2E5DC /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA121BC42C77FEE500B2E5DC /* LoginRequest.swift */; };
 		FA8045ED2C7523DB005EB72B /* MessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045EC2C7523DB005EB72B /* MessageItem.swift */; };
 		FA8045EF2C7524F1005EB72B /* BubbleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */; };
 		FA8045F12C753391005EB72B /* BubbleTailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045F02C753390005EB72B /* BubbleTailView.swift */; };
@@ -70,6 +76,11 @@
 		FA121BB12C77CBB700B2E5DC /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
 		FA121BB32C77CF2900B2E5DC /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		FA121BB62C77D25A00B2E5DC /* AuthProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProviderService.swift; sourceTree = "<group>"; };
+		FA121BBC2C77F5E300B2E5DC /* RootScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootScreen.swift; sourceTree = "<group>"; };
+		FA121BBE2C77F5FB00B2E5DC /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
+		FA121BC02C77F99300B2E5DC /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		FA121BC22C77FBFE00B2E5DC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FA121BC42C77FEE500B2E5DC /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		FA8045EC2C7523DB005EB72B /* MessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageItem.swift; sourceTree = "<group>"; };
 		FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTextView.swift; sourceTree = "<group>"; };
 		FA8045F02C753390005EB72B /* BubbleTailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTailView.swift; sourceTree = "<group>"; };
@@ -100,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA121BBA2C77F07A00B2E5DC /* CodableFirebase in Frameworks */,
 				FA121B852C77A96700B2E5DC /* FirebaseMLModelDownloader in Frameworks */,
 				FA121B872C77A96700B2E5DC /* FirebaseStorage in Frameworks */,
 				FA121B832C77A96700B2E5DC /* FirebaseDatabase in Frameworks */,
@@ -123,9 +135,9 @@
 			isa = PBXGroup;
 			children = (
 				FA121BA22C77B4A500B2E5DC /* AuthHeaderView.swift */,
+				FA121BB32C77CF2900B2E5DC /* AuthViewModel.swift */,
 				FA121B9E2C77B3F300B2E5DC /* Login */,
 				FA121B9F2C77B3F600B2E5DC /* Register */,
-				FA121BB32C77CF2900B2E5DC /* AuthViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -171,10 +183,21 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		FA121BBB2C77F5D400B2E5DC /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				FA121BBC2C77F5E300B2E5DC /* RootScreen.swift */,
+				FA121BBE2C77F5FB00B2E5DC /* RootViewModel.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
 		FA8045EB2C7523CE005EB72B /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				FA8045EC2C7523DB005EB72B /* MessageItem.swift */,
+				FA121BC22C77FBFE00B2E5DC /* User.swift */,
+				FA121BC42C77FEE500B2E5DC /* LoginRequest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -233,6 +256,7 @@
 		FABC46812C73FDCA008DA69B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				FA121BBB2C77F5D400B2E5DC /* Root */,
 				FA121B9D2C77B3EE00B2E5DC /* Auth */,
 				FABC46862C73FDF8008DA69B /* Updates */,
 				FABC46852C73FDF5008DA69B /* Calls */,
@@ -250,6 +274,7 @@
 				FABC468D2C740781008DA69B /* SettingsTabScreen.swift */,
 				FABC468F2C74085D008DA69B /* SettingsItemView.swift */,
 				FABC46912C74092B008DA69B /* SettingsItem.swift */,
+				FA121BC02C77F99300B2E5DC /* SettingsViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -325,6 +350,7 @@
 				FA121B842C77A96700B2E5DC /* FirebaseMLModelDownloader */,
 				FA121B862C77A96700B2E5DC /* FirebaseStorage */,
 				FA121B962C77AF9600B2E5DC /* SwiftUIIntrospect */,
+				FA121BB92C77F07A00B2E5DC /* CodableFirebase */,
 			);
 			productName = Whatsapp;
 			productReference = FABC466A2C73E2D4008DA69B /* Whatsapp.app */;
@@ -357,6 +383,7 @@
 			packageReferences = (
 				FA121B7F2C77A96700B2E5DC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				FA121B952C77AF9500B2E5DC /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
+				FA121BB82C77F07A00B2E5DC /* XCRemoteSwiftPackageReference "CodableFirebase" */,
 			);
 			productRefGroup = FABC466B2C73E2D4008DA69B /* Products */;
 			projectDirPath = "";
@@ -386,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA121BAC2C77B7B600B2E5DC /* Constants.swift in Sources */,
+				FA121BC52C77FEE500B2E5DC /* LoginRequest.swift in Sources */,
 				FA121BB02C77C24500B2E5DC /* AuthButton.swift in Sources */,
 				FABC468E2C740781008DA69B /* SettingsTabScreen.swift in Sources */,
 				FABC467E2C73EBBF008DA69B /* UpdatesTabScreen.swift in Sources */,
@@ -396,9 +424,11 @@
 				FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */,
 				FA8045F12C753391005EB72B /* BubbleTailView.swift in Sources */,
 				FABC46952C740EB8008DA69B /* ChatRoomScreen.swift in Sources */,
+				FA121BBF2C77F5FB00B2E5DC /* RootViewModel.swift in Sources */,
 				FA121BB22C77CBB700B2E5DC /* SignUpScreen.swift in Sources */,
 				FA121BB72C77D25A00B2E5DC /* AuthProviderService.swift in Sources */,
 				FABC46902C74085D008DA69B /* SettingsItemView.swift in Sources */,
+				FA121BC12C77F99300B2E5DC /* SettingsViewModel.swift in Sources */,
 				FA121BA12C77B40300B2E5DC /* LoginScreen.swift in Sources */,
 				FA121B9A2C77B1D100B2E5DC /* FirebaseManager.swift in Sources */,
 				FA8045F62C761DB5005EB72B /* BubbleImageView.swift in Sources */,
@@ -408,12 +438,14 @@
 				FA8045EF2C7524F1005EB72B /* BubbleTextView.swift in Sources */,
 				FA8045ED2C7523DB005EB72B /* MessageItem.swift in Sources */,
 				FABC46922C74092B008DA69B /* SettingsItem.swift in Sources */,
+				FA121BBD2C77F5E300B2E5DC /* RootScreen.swift in Sources */,
 				FA8045F42C753510005EB72B /* CustomModifiers.swift in Sources */,
 				FA8045F82C778221005EB72B /* BubbleAudioView.swift in Sources */,
 				FA121BB42C77CF2900B2E5DC /* AuthViewModel.swift in Sources */,
 				FA121BA32C77B4A500B2E5DC /* AuthHeaderView.swift in Sources */,
 				FABC46972C7410A8008DA69B /* TextInputAreaView.swift in Sources */,
 				FABC46992C74D95E008DA69B /* MessageListViewController.swift in Sources */,
+				FA121BC32C77FBFE00B2E5DC /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,6 +667,14 @@
 				version = 1.0.0;
 			};
 		};
+		FA121BB82C77F07A00B2E5DC /* XCRemoteSwiftPackageReference "CodableFirebase" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alickbass/CodableFirebase";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -662,6 +702,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA121B952C77AF9500B2E5DC /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
 			productName = SwiftUIIntrospect;
+		};
+		FA121BB92C77F07A00B2E5DC /* CodableFirebase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA121BB82C77F07A00B2E5DC /* XCRemoteSwiftPackageReference "CodableFirebase" */;
+			productName = CodableFirebase;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

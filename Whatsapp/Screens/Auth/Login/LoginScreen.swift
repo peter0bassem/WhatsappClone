@@ -20,7 +20,9 @@ struct LoginScreen: View {
                 AuthTextField(type: .password, text: $authViewModel.password)
                 forgotPasswordButton()
                 AuthButton(title: "Login") {
-                    let _ = print("Perform login...")
+                    Task {
+                        await authViewModel.performLogin()
+                    }
                 }
                 .disabled(authViewModel.disableLoginButton)
                 Spacer()
@@ -30,6 +32,11 @@ struct LoginScreen: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.teal.gradient)
             .ignoresSafeArea()
+            .alert(isPresented: $authViewModel.errorState.showError) {
+                Alert(
+                    title: Text(authViewModel.errorState.errorMessage),
+                    dismissButton: .default(Text("Ok")))
+            }
         }
     }
     

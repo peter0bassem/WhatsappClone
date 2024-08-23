@@ -31,6 +31,12 @@ struct SignUpScreen: View {
         .background(LinearGradient(colors: [.green, .green.opacity(0.8), .teal], startPoint: .top, endPoint: .bottom))
         .ignoresSafeArea()
         .navigationBarBackButtonHidden()
+        .alert(isPresented: $authViewModel.errorState.showError) {
+            Alert(
+                title: Text(authViewModel.errorState.errorMessage),
+                dismissButton: .default(Text("Ok")))
+        }
+
     }
     
     private func backButton() -> some View {

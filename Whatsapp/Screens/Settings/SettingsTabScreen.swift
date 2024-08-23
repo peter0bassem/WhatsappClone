@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct SettingsTabScreen: View {
-    @State private var searchText: String = ""
+    
+    @StateObject private var settingsViewModel = SettingsViewModel()
+    
+    
     var body: some View {
         NavigationStack {
             List {
@@ -34,11 +37,22 @@ struct SettingsTabScreen: View {
                 }
             }
             .navigationTitle("Settings")
-            .searchable(text: $searchText)
+            .searchable(text: $settingsViewModel.searchText)
             .scrollIndicators(.hidden)
             .toolbar {
+                leadingNavBarItem()
                 trailingNavBarItem()
             }
+        }
+    }
+    
+    @ToolbarContentBuilder
+    private func leadingNavBarItem() -> some ToolbarContent {
+        ToolbarItem(placement: .topBarLeading) {
+            Button(action: settingsViewModel.logutUser, label: {
+                Text("Sign Out")
+                    .foregroundStyle(.red)
+            })
         }
     }
     
@@ -54,6 +68,7 @@ struct SettingsTabScreen: View {
 }
 
 private struct SettingsHeaderView: View {
+    @EnvironmentObject var userViewModel: UserViewModel
     var body: some View {
         Section {
             HStack {
@@ -68,7 +83,7 @@ private struct SettingsHeaderView: View {
     private func userInfoTextView() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                Text("Logged Username")
+                Text(userViewModel.user?.username.capitalized ?? "")
                     .font(.title2)
                 Spacer()
                 Image(.qrcode)
@@ -88,4 +103,5 @@ private struct SettingsHeaderView: View {
 
 #Preview {
     SettingsTabScreen()
+        .environmentObject(UserViewModel.dummyUserViewModel())
 }

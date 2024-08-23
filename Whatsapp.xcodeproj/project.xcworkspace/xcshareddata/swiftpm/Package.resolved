@@ -1,5 +1,5 @@
 {
-  "originHash" : "30a34d1dd81193a069d82ba349fad224b7b74d945dcf8cf2d5d7616a4c9a2845",
+  "originHash" : "b6c4d1e3ac1ebd7ce60534de45a48386b6e0a833bdd50a58db7e31e0cb08ad9f",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "21fe1af9be463a359aaf8d96789ef73fc3760d09",
         "version" : "11.0.1"
+      }
+    },
+    {
+      "identity" : "codablefirebase",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/alickbass/CodableFirebase",
+      "state" : {
+        "revision" : "a4cda89948db93ec21249a35ecdacab8c489a116",
+        "version" : "0.2.2"
       }
     },
     {

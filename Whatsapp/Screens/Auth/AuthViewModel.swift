@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class AuthViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var email: String = ""
@@ -20,6 +21,17 @@ final class AuthViewModel: ObservableObject {
     
     var disableSignUpButton: Bool {
         email.isEmpty || username.isEmpty || password.isEmpty || isLoading
+    }
+    
+    func performLogin() async {
+        isLoading = true
+        do {
+            let loginRequest = LoginRequest(email: email, password: password)
+            try await AuthProviderServiceImp.shared.login(loginRequest: loginRequest)
+        } catch {
+            errorState = (true, "Failed to login user \(error.localizedDescription)")
+            isLoading = false
+        }
     }
     
     func performSignup() async {
