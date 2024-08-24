@@ -16,19 +16,31 @@ struct GroupPartnerPickerScreen: View {
                 SelectedChatPartnerView(users: $chatPartnerPickerViewModel.selectedChatPartners) { user in
                     chatPartnerPickerViewModel.handleItemSelection(user)
                 }
+//                .animation(.easeInOut, value: chatPartnerPickerViewModel.selectedChatPartners)
             }
             
             Section {
-                ForEach(User.placeholders) { item in
+                ForEach(chatPartnerPickerViewModel.users) { item in
                     chatPartnerRowView(item)
                         .contentShape(Rectangle())
                         .onTapGesture {
                             chatPartnerPickerViewModel.handleItemSelection(item)
                         }
+                        .task {
+                            if chatPartnerPickerViewModel.hasReachedEnd(of: item) && !chatPartnerPickerViewModel.isFetching {
+                                await chatPartnerPickerViewModel.fetchUsers()
+                            }
+                        }
                 }
             }
         }
         .scrollIndicators(.hidden)
+        .overlay(alignment: .bottom) {
+            if chatPartnerPickerViewModel.isFetching {
+                ProgressView()
+                    .controlSize(.regular)
+            }
+        }
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search name or number")
         .animation(.easeInOut, value: chatPartnerPickerViewModel.showSelectedUsers)
@@ -77,6 +89,15 @@ extension GroupPartnerPickerScreen {
             })
             .disabled(chatPartnerPickerViewModel.disableNextButton)
         }
+    }
+    
+    private func loadMoreUsers() -> some View {
+        ProgressView()
+            .frame(maxWidth: .infinity)
+            .listRowBackground(Color.clear)
+            .task {
+                await chatPartnerPickerViewModel.fetchUsers()
+            }
     }
 }
 

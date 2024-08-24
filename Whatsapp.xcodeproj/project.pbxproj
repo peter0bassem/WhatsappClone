@@ -40,6 +40,9 @@
 		FA8045F82C778221005EB72B /* BubbleAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045F72C778221005EB72B /* BubbleAudioView.swift */; };
 		FA8216992C78C3CD005BE060 /* SelectedChatPartnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216982C78C3CD005BE060 /* SelectedChatPartnerView.swift */; };
 		FA82169B2C78C9E3005BE060 /* GroupSetupScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82169A2C78C9E3005BE060 /* GroupSetupScreen.swift */; };
+		FA82169D2C78D88B005BE060 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82169C2C78D88B005BE060 /* UserService.swift */; };
+		FA8216A02C78D96C005BE060 /* AuthFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82169F2C78D96C005BE060 /* AuthFirebaseManager.swift */; };
+		FA8216A22C78DA0C005BE060 /* UserFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216A12C78DA0C005BE060 /* UserFirebaseManager.swift */; };
 		FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */; };
 		FABC46722C73E2D6008DA69B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46712C73E2D6008DA69B /* Assets.xcassets */; };
 		FABC46752C73E2D6008DA69B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46742C73E2D6008DA69B /* Preview Assets.xcassets */; };
@@ -99,6 +102,9 @@
 		FA8045F72C778221005EB72B /* BubbleAudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleAudioView.swift; sourceTree = "<group>"; };
 		FA8216982C78C3CD005BE060 /* SelectedChatPartnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedChatPartnerView.swift; sourceTree = "<group>"; };
 		FA82169A2C78C9E3005BE060 /* GroupSetupScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSetupScreen.swift; sourceTree = "<group>"; };
+		FA82169C2C78D88B005BE060 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		FA82169F2C78D96C005BE060 /* AuthFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFirebaseManager.swift; sourceTree = "<group>"; };
+		FA8216A12C78DA0C005BE060 /* UserFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFirebaseManager.swift; sourceTree = "<group>"; };
 		FABC466A2C73E2D4008DA69B /* Whatsapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whatsapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsappApp.swift; sourceTree = "<group>"; };
 		FABC46712C73E2D6008DA69B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -138,7 +144,7 @@
 		FA121B982C77B1C700B2E5DC /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				FA121B992C77B1D100B2E5DC /* FirebaseManager.swift */,
+				FA82169E2C78D95C005BE060 /* Firebase */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -191,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				FA121BB62C77D25A00B2E5DC /* AuthProviderService.swift */,
+				FA82169C2C78D88B005BE060 /* UserService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -220,6 +227,16 @@
 				FA8045F32C753510005EB72B /* CustomModifiers.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		FA82169E2C78D95C005BE060 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				FA121B992C77B1D100B2E5DC /* FirebaseManager.swift */,
+				FA82169F2C78D96C005BE060 /* AuthFirebaseManager.swift */,
+				FA8216A12C78DA0C005BE060 /* UserFirebaseManager.swift */,
+			);
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 		FABC46612C73E2D4008DA69B = {
@@ -430,6 +447,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA8216A22C78DA0C005BE060 /* UserFirebaseManager.swift in Sources */,
 				FA121BAC2C77B7B600B2E5DC /* Constants.swift in Sources */,
 				FA121BC52C77FEE500B2E5DC /* LoginRequest.swift in Sources */,
 				FA121BB02C77C24500B2E5DC /* AuthButton.swift in Sources */,
@@ -446,6 +464,7 @@
 				FA121BBF2C77F5FB00B2E5DC /* RootViewModel.swift in Sources */,
 				FA121BB22C77CBB700B2E5DC /* SignUpScreen.swift in Sources */,
 				FA82169B2C78C9E3005BE060 /* GroupSetupScreen.swift in Sources */,
+				FA8216A02C78D96C005BE060 /* AuthFirebaseManager.swift in Sources */,
 				FA121BCB2C78ABA300B2E5DC /* ChatPartnerRowView.swift in Sources */,
 				FA121BB72C77D25A00B2E5DC /* AuthProviderService.swift in Sources */,
 				FABC46902C74085D008DA69B /* SettingsItemView.swift in Sources */,
@@ -469,6 +488,7 @@
 				FA8216992C78C3CD005BE060 /* SelectedChatPartnerView.swift in Sources */,
 				FABC46972C7410A8008DA69B /* TextInputAreaView.swift in Sources */,
 				FABC46992C74D95E008DA69B /* MessageListViewController.swift in Sources */,
+				FA82169D2C78D88B005BE060 /* UserService.swift in Sources */,
 				FA121BC32C77FBFE00B2E5DC /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,12 +1,11 @@
 //
-//  FirebaseManager.swift
+//  AuthFirebaseManager.swift
 //  Whatsapp
 //
-//  Created by iCommunity app on 22/08/2024.
+//  Created by iCommunity app on 23/08/2024.
 //
 
 import Foundation
-import FirebaseCore
 import FirebaseAuth
 import FirebaseDatabase
 import CodableFirebase
@@ -35,12 +34,9 @@ extension AuthError: LocalizedError {
     }
 }
 
-class FirebaseManager {
+actor AuthFirebaseManager {
     private static var databaseReference: DatabaseReference {
         Database.database().reference()
-    }
-    static func configureApp() {
-        FirebaseApp.configure()
     }
     
     static func loginUser(loginRequest: LoginRequest) async throws -> User? {
@@ -82,26 +78,40 @@ class FirebaseManager {
     }
     
     static func fetchCurrentUserInfo() async -> User? {
-        return await withCheckedContinuation { continuation in
-            guard let currentUid = Auth.auth().currentUser?.uid else { /*continuation.resume(returning: nil);*/ return }
-            FirebaseReferenceConstants.usersRef.child(currentUid)
-                .observe(.value) { snapshot in
-                    guard let value = snapshot.value else { continuation.resume(returning: nil); return }
-                    do {
-                        let user = try FirebaseDecoder().decode(User.self, from: value)
-                        print("🔐 logged in user: \(user)")
-                        continuation.resume(returning: user)
-                    } catch {
-                        print("Failed to decode user snapshot.value \(error.localizedDescription)")
-//                        continuation.resume(returning: nil)
-                        return
-                    }
-                } withCancel: { error in
-                    print("Failed to get current user info \(error.localizedDescription)")
-//                    continuation.resume(returning: nil)
-                    return
-                }
+        guard let currentUid = Auth.auth().currentUser?.uid else { return nil }
+        do {
+            let userSnapshot = try await FirebaseReferenceConstants.usersRef.child(currentUid).getData()
+            guard let value = userSnapshot.value else { return nil }
+            let user = try FirebaseDecoder().decode(User.self, from: value)
+            print("🔐 logged in user: \(user)")
+            return user
+        } catch {
+            print("Failed to get current user info \(error.localizedDescription)")
+            return nil
         }
+        
+//        return await withCheckedContinuation { continuation in
+//            guard let currentUid = Auth.auth().currentUser?.uid else { /*continuation.resume(returning: nil);*/ return }
+//            FirebaseReferenceConstants.usersRef.child(currentUid)
+//                .observe(.value) { snapshot in
+//                    guard let value = snapshot.value else { continuation.resume(returning: nil); return }
+//                    do {
+//                        let user = try FirebaseDecoder().decode(User.self, from: value)
+//                        print("🔐 logged in user: \(user)")
+//                        continuation.resume(returning: user)
+//                    } catch {
+//                        print("Failed to decode user snapshot.value \(error.localizedDescription)")
+//                        return
+//                    }
+//                } withCancel: { error in
+//                    print("Failed to get current user info \(error.localizedDescription)")
+//                    return
+//                }
+//        }
+    }
+    
+    static func getCurrentUserId() -> String? {
+        Auth.auth().currentUser?.uid
     }
     
     static func logoutUser() async throws {
@@ -113,4 +123,3 @@ class FirebaseManager {
         }
     }
 }
-

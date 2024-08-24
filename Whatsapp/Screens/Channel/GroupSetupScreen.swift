@@ -41,11 +41,24 @@ struct GroupSetupScreen: View {
     
     private func channelSetupHeaderView() -> some View {
         HStack {
-            Circle()
-                .frame(width: 60, height: 60)
-            
+            profileImageView()
             TextField("", text: $channelName, prompt: Text("Group Name (Optional)"), axis: .vertical)
         }
+    }
+    
+    private func profileImageView() -> some View {
+        Button {
+            
+        } label: {
+            ZStack {
+                Image(systemName: "camera.fill")
+                    .imageScale(.large)
+            }
+            .frame(width: 60, height: 60)
+            .background(Color(.systemGray5))
+            .clipShape(Circle())
+        }
+
     }
     
     @ToolbarContentBuilder

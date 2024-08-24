@@ -41,14 +41,21 @@ struct ChatPartnerPickerScreen: View {
             List {
                 ForEach(ChatPartnerPickerOptions.allCases) { item in
                     HeaderItemView(item: item)
+                        .contentShape(Rectangle())
                         .onTapGesture {
+                            guard item == ChatPartnerPickerOptions.newGroup else { return }
                             chatPartnerPickerViewModel.navStack.append(.groupParnterPicker)
                         }
                 }
                 
                 Section {
-                    ForEach(0..<12) { _ in
-                        ChatPartnerRowView(user: .placeholderUser)
+                    ForEach(chatPartnerPickerViewModel.users) { user in
+                        ChatPartnerRowView(user: user)
+                            .task {
+                                if chatPartnerPickerViewModel.hasReachedEnd(of: user) && !chatPartnerPickerViewModel.isFetching {
+                                    await chatPartnerPickerViewModel.fetchUsers()
+                                }
+                            }
                     }
                 } header: {
                     Text("Contacts on WhatsApp")
@@ -56,6 +63,12 @@ struct ChatPartnerPickerScreen: View {
                 }
             }
             .scrollIndicators(.hidden)
+            .overlay(alignment: .bottom) {
+                if chatPartnerPickerViewModel.isFetching {
+                    ProgressView()
+                        .controlSize(.regular)
+                }
+            }
             .navigationTitle("New Chats")
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search name or number")
@@ -94,24 +107,30 @@ struct ChatPartnerPickerScreen: View {
             GroupSetupScreen(chatPartnerPickerViewModel: chatPartnerPickerViewModel)
         }
     }
+    
+    private func loadMoreUsers() -> some View {
+        ProgressView()
+            .frame(maxWidth: .infinity)
+            .listRowBackground(Color.clear)
+//            .task {
+//                await chatPartnerPickerViewModel.fetchUsers()
+//            }
+    }
 }
 
 extension ChatPartnerPickerScreen {
     private struct HeaderItemView: View {
         let item: ChatPartnerPickerOptions
         var body: some View {
-            Button {
+            HStack {
+                Image(systemName: item.imageName)
+                    .font(.footnote)
+                    .frame(width: 40, height: 40)
+                    .background(Color(.systemGray6))
+                    .clipShape(Circle())
                 
-            } label: {
-                HStack {
-                    Image(systemName: item.imageName)
-                        .font(.footnote)
-                        .frame(width: 40, height: 40)
-                        .background(Color(.systemGray6))
-                        .clipShape(Circle())
-                    
-                    Text(item.title)
-                }
+                Text(item.title)
+                Spacer()
             }
         }
     }
