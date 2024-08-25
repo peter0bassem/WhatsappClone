@@ -13,18 +13,18 @@ actor UserFirebaseManager {
     static func initialUsersFetch(lastCursor: String?, pageSize: UInt) async throws -> UserNode {
         async let mainDaaSnapshot: DataSnapshot = {
             if lastCursor == nil {
-                return try await FirebaseReferenceConstants.usersRef
+                return try await FirebaseReferenceConstants.UsersRef
                     .queryLimited(toLast: pageSize)
                     .getData()
             } else {
-                return try await FirebaseReferenceConstants.usersRef
+                return try await FirebaseReferenceConstants.UsersRef
                     .queryOrderedByKey()
                     .queryEnding(atValue: lastCursor)
                     .queryLimited(toLast: pageSize + 1)
                     .getData()
             }
         }()
-        async let totalUsersDataSnapshot = try await FirebaseReferenceConstants.usersRef.getData()
+        async let totalUsersDataSnapshot = try await FirebaseReferenceConstants.UsersRef.getData()
         let (mainSnapshot, totalUsersSnapshot) = try await (mainDaaSnapshot, totalUsersDataSnapshot)
         let value = mainSnapshot.children.compactMap { ($0 as? DataSnapshot)?.value } as Any
         let firstUserValueKey = mainSnapshot.children.map { ($0 as? DataSnapshot)?.key }.first ?? ""

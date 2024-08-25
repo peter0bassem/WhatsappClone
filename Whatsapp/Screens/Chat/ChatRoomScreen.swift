@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ChatRoomScreen: View {
+    let channel: Channel
+    @State private var channelName: String = ""
     var body: some View {
         ScrollView {
             LazyVStack {
-                ForEach(MessageItem.stubMessages) { messageItem in
+                ForEach(Message.stubMessages) { messageItem in
                     switch messageItem.type {
-                    case .text(let message):
+                    case .text(_):
                         BubbleTextView(item: messageItem)
                     case .photo, .video:
                         BubbleImageView(item: messageItem)
@@ -47,8 +49,11 @@ private extension ChatRoomScreen {
                 Circle()
                     .frame(width: 35, height: 35)
                 VStack(alignment: .leading) {
-                    Text("Username")
+                    Text(channelName)
                         .bold()
+                        .task {
+                            channelName = await channel.title
+                        }
                     Text("Online")
                         .font(.system(size: 12))
                         .foregroundStyle(.gray)
@@ -73,6 +78,6 @@ private extension ChatRoomScreen {
 
 #Preview {
     NavigationStack {
-        ChatRoomScreen()
+        ChatRoomScreen(channel: .placeholderChannel)
     }
 }

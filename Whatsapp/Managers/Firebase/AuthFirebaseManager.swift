@@ -10,11 +10,6 @@ import FirebaseAuth
 import FirebaseDatabase
 import CodableFirebase
 
-enum FirebaseReferenceConstants {
-    private static let databaseReference = Database.database().reference()
-    static let usersRef = databaseReference.child("users")
-}
-
 enum AuthError: Error {
     case accountCreationFailed(_ description: String)
     case failedToSaveUserInfoToFirebase(_ description: String)
@@ -66,7 +61,7 @@ actor AuthFirebaseManager {
     private static func saveUserInfoToFirebaseDatabase(user: User) async throws {
         do {
             let userData = try FirebaseEncoder().encode(user)
-            try await FirebaseReferenceConstants.usersRef.child(user.uid).setValue(userData)
+            try await FirebaseReferenceConstants.UsersRef.child(user.uid).setValue(userData)
         } catch {
             print("🔐 Failed to save created user into firebase database: \(error.localizedDescription)")
             throw AuthError.failedToSaveUserInfoToFirebase(error.localizedDescription)
@@ -80,7 +75,7 @@ actor AuthFirebaseManager {
     static func fetchCurrentUserInfo() async -> User? {
         guard let currentUid = Auth.auth().currentUser?.uid else { return nil }
         do {
-            let userSnapshot = try await FirebaseReferenceConstants.usersRef.child(currentUid).getData()
+            let userSnapshot = try await FirebaseReferenceConstants.UsersRef.child(currentUid).getData()
             guard let value = userSnapshot.value else { return nil }
             let user = try FirebaseDecoder().decode(User.self, from: value)
             print("🔐 logged in user: \(user)")

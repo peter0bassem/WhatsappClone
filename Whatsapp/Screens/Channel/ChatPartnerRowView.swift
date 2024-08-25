@@ -29,6 +29,7 @@ struct ChatPartnerRowView<Content: View>: View {
                     .font(.caption)
                     .foregroundStyle(.gray)
             }
+            Spacer()
             trailingItems
         }
     }

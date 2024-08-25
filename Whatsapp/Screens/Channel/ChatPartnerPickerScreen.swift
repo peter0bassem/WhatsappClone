@@ -36,6 +36,7 @@ struct ChatPartnerPickerScreen: View {
     @State private var searchText: String = ""
     @Environment(\.dismiss) private var dismsiss
     @StateObject private var chatPartnerPickerViewModel = ChatPartnerPickerViewModel()
+    var onCreate: (_ channel: Channel) -> Void
     var body: some View {
         NavigationStack(path: $chatPartnerPickerViewModel.navStack) {
             List {
@@ -51,6 +52,14 @@ struct ChatPartnerPickerScreen: View {
                 Section {
                     ForEach(chatPartnerPickerViewModel.users) { user in
                         ChatPartnerRowView(user: user)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                Task {
+                                    if let newChannel = await chatPartnerPickerViewModel.createDirectChannel(withPartner: user) {
+                                        onCreate(newChannel)
+                                    }
+                                }
+                            }
                             .task {
                                 if chatPartnerPickerViewModel.hasReachedEnd(of: user) && !chatPartnerPickerViewModel.isFetching {
                                     await chatPartnerPickerViewModel.fetchUsers()
@@ -78,6 +87,12 @@ struct ChatPartnerPickerScreen: View {
             .navigationDestination(for: ChannelCreationRoute.self) { route in
                 destinationView(for: route)
             }
+            .onAppear {
+                chatPartnerPickerViewModel.deselectAllChatPartners()
+            }
+            .alert(isPresented: $chatPartnerPickerViewModel.errorState.showError) {
+                Alert(title: Text("Uh Oh😕"), message: Text(chatPartnerPickerViewModel.errorState.errorMessage), dismissButton: .default(Text("Ok")))
+            }
         }
     }
     
@@ -104,17 +119,8 @@ struct ChatPartnerPickerScreen: View {
         case .groupParnterPicker:
             GroupPartnerPickerScreen(chatPartnerPickerViewModel: chatPartnerPickerViewModel)
         case .setupGroupChat:
-            GroupSetupScreen(chatPartnerPickerViewModel: chatPartnerPickerViewModel)
+            GroupSetupScreen(chatPartnerPickerViewModel: chatPartnerPickerViewModel, onCreate: onCreate)
         }
-    }
-    
-    private func loadMoreUsers() -> some View {
-        ProgressView()
-            .frame(maxWidth: .infinity)
-            .listRowBackground(Color.clear)
-//            .task {
-//                await chatPartnerPickerViewModel.fetchUsers()
-//            }
     }
 }
 
@@ -137,5 +143,5 @@ extension ChatPartnerPickerScreen {
 }
 
 #Preview {
-    ChatPartnerPickerScreen()
+    ChatPartnerPickerScreen { _ in }
 }

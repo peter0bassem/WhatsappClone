@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ChannelTabScreen: View {
-    @State private var searchText: String = ""
-    @State private var showChartPartnerPickerView = false
+    
+    @ObservedObject private var channelViewModel = ChannelViewModel()
     var body: some View {
         NavigationStack {
             List {
@@ -17,7 +17,7 @@ struct ChannelTabScreen: View {
                 
                 ForEach(0..<12) { _ in
                     NavigationLink {
-                        ChatRoomScreen()
+                        ChatRoomScreen(channel: .placeholderChannel)
                     } label: {
                         ChannelItemView()
                     }
@@ -26,16 +26,21 @@ struct ChannelTabScreen: View {
                     .listRowSeparator(.hidden)
             }
             .navigationTitle("Chats")
-            .searchable(text: $searchText)
+            .searchable(text: $channelViewModel.searchText)
             .listStyle(.plain)
             .scrollIndicators(.hidden)
             .toolbar {
                 leadingNavItems()
                 trailingNavItems()
             }
-            .sheet(isPresented: $showChartPartnerPickerView, content: {
-                ChatPartnerPickerScreen()
-            })
+            .sheet(isPresented: $channelViewModel.showChartPartnerPickerView) {
+                ChatPartnerPickerScreen(onCreate: channelViewModel.onNewChannelCreation)
+            }
+            .navigationDestination(isPresented: $channelViewModel.navigateToChatRoom) {
+                if let newChannel = channelViewModel.newChannel {
+                    ChatRoomScreen(channel: newChannel)
+                }
+            }
         }
     }
     
@@ -82,7 +87,7 @@ struct ChannelTabScreen: View {
     
     private func newChatButton() -> some View {
         Button {
-            showChartPartnerPickerView.toggle()
+            channelViewModel.showChartPartnerPickerView.toggle()
         } label: {
             Image(.plus)
         }

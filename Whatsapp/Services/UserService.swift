@@ -12,9 +12,11 @@ protocol UserService: Actor {
     func paginateUsers(lastCursor: String?, pageSize: UInt) async throws -> UserNode
 }
 
-actor UserServiceImp: UserService {
+final actor UserServiceImp: UserService {
     
     static var shared: UserService = UserServiceImp()
+    
+    private init() { }
     
     func paginateUsers(lastCursor: String?, pageSize: UInt) async throws -> UserNode {
         return try await UserFirebaseManager.initialUsersFetch(lastCursor: lastCursor, pageSize: pageSize)

@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUIIntrospect
 
 struct BubbleAudioView: View {
-    let item: MessageItem
+    let item: Message
     @State private var sliderValue: Double = 0.0
     @State private var sliderRange: ClosedRange<Double> = 0...20
     var body: some View {

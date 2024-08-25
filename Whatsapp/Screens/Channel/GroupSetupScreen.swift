@@ -10,6 +10,7 @@ import SwiftUI
 struct GroupSetupScreen: View {
     @State private var channelName: String = ""
     @ObservedObject var chatPartnerPickerViewModel: ChatPartnerPickerViewModel
+    var onCreate: (_ channel: Channel) -> Void
     var body: some View {
         List {
             Section {
@@ -36,6 +37,9 @@ struct GroupSetupScreen: View {
         .navigationTitle("New Group")
         .toolbar {
             trailingNavBarItem()
+        }
+        .alert(isPresented: $chatPartnerPickerViewModel.errorState.showError) {
+            Alert(title: Text("Uh Oh😕"), message: Text(chatPartnerPickerViewModel.errorState.errorMessage), dismissButton: .default(Text("Ok")))
         }
     }
     
@@ -64,7 +68,13 @@ struct GroupSetupScreen: View {
     @ToolbarContentBuilder
     private func trailingNavBarItem() -> some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+            Button(action: {
+                Task {
+                    if let newChannel = await chatPartnerPickerViewModel.createGroupChannel(channelName) {
+                        onCreate(newChannel)
+                    }
+                }
+            }, label: {
                 Text("Create")
                     .bold()
             })
@@ -75,6 +85,6 @@ struct GroupSetupScreen: View {
 
 #Preview {
     NavigationStack {
-        GroupSetupScreen(chatPartnerPickerViewModel: .init())
+        GroupSetupScreen(chatPartnerPickerViewModel: .init()) { _ in }
     }
 }

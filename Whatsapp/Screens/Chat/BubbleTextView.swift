@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BubbleTextView: View {
-    let item: MessageItem
+    let item: Message
     var body: some View {
         HStack {
             if item.direction == .sent {

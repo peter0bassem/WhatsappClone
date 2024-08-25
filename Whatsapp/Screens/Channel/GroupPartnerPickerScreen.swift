@@ -16,7 +16,6 @@ struct GroupPartnerPickerScreen: View {
                 SelectedChatPartnerView(users: $chatPartnerPickerViewModel.selectedChatPartners) { user in
                     chatPartnerPickerViewModel.handleItemSelection(user)
                 }
-//                .animation(.easeInOut, value: chatPartnerPickerViewModel.selectedChatPartners)
             }
             
             Section {
@@ -89,15 +88,6 @@ extension GroupPartnerPickerScreen {
             })
             .disabled(chatPartnerPickerViewModel.disableNextButton)
         }
-    }
-    
-    private func loadMoreUsers() -> some View {
-        ProgressView()
-            .frame(maxWidth: .infinity)
-            .listRowBackground(Color.clear)
-            .task {
-                await chatPartnerPickerViewModel.fetchUsers()
-            }
     }
 }
 
