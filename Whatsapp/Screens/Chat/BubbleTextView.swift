@@ -9,41 +9,45 @@ import SwiftUI
 
 struct BubbleTextView: View {
     let item: Message
+    @State private var itemDirection: MessageDirection = .unset
+    @State private var itemHorizontalAlignmnet: HorizontalAlignment = .center
+    @State private var itemAlignment: Alignment = .center
+    @State private var itemBackground: Color = .clear
+    
+    @State private var messageTextSize: CGSize = .zero
     var body: some View {
         HStack {
-            if item.direction == .sent {
-                Spacer()
-            }
-            VStack(alignment: item.horizontalAlignment, spacing: -20) { // spacing between text and time
-                Text(item.text/*item.direction == .sent ? "Hi John, it's been so long since we last catch up, how are you doing?" : "Hey!! Wanna meet for a dinner tonight?"*/)
-                    .padding(10) // padding between text and edges
-                    .frame(maxWidth: .infinity, alignment: .topLeading)
+            if itemDirection == .sent {  Spacer(minLength: UIScreen.main.bounds.width * 0.30) }
+            
+            VStack(alignment: itemHorizontalAlignmnet, spacing: -20) {
+                Text(item.text.removeOptional)
+                    .padding(10)
                 
                 timestampView()
-//                    .background(Color.yellow)
-//                    .padding(.top, item.direction == .received ? -16 : 0)
-//                    .padding(.top, item.direction == .sent ? -2 : 0)
             }
             .shadow(color: Color(.systemGray3).opacity(0.1), radius: 5, x: 0.0, y: 20.0)
-            .frame(width: UIScreen.main.bounds.width * 0.70, alignment: .leading)
-            .background(item.backgroundColor)
+            .fixedSize(horizontal: false, vertical: true)
+            .background(itemBackground)
             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-            .applyTail(direction: item.direction)
+            .applyTail(direction: itemDirection)
             
-            if item.direction == .received {
-                Spacer()
-            }
+            if itemDirection == .received { Spacer(minLength: UIScreen.main.bounds.width * 0.30) }
+        }
+        .task {
+            itemDirection = await item.direction
+            itemHorizontalAlignmnet = await item.horizontalAlignment
+            itemAlignment = await item.alignment
+            itemBackground = await item.backgroundColor
         }
     }
     
     private func timestampView() -> some View {
         HStack(spacing: 2) {
             Text("3:05 PM")
-                .font(.caption2/*.system(size: 13)*/)
+                .font(.caption2)
                 .foregroundStyle(.gray)
-                .frame(maxWidth: .infinity, alignment: .bottomTrailing)
             
-            if item.direction == .sent {
+            if itemDirection == .sent {
                 Image(.seen)
                     .resizable()
                     .renderingMode(.template)
@@ -61,6 +65,8 @@ struct BubbleTextView: View {
             BubbleTextView(item: .sentPlaceholder)
             BubbleTextView(item: .receivedPlaceholder)
             BubbleTextView(item: .sentPlaceholder)
+            BubbleTextView(item: .init(id: "", text: "Hello there!", type: .text, ownerId: "RfZDo1E35IVnZUH4C14pEgr7wxH2", timestamp: nil))
+            BubbleTextView(item: .init(id: "", text: "Hi!", type: .text, ownerId: "RfZDo1E35IVnZUH4C14pEgr7wxH2", timestamp: nil))
         }
         .padding(.horizontal, 10)
     }

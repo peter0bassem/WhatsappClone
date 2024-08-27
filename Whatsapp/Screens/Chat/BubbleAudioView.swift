@@ -10,26 +10,34 @@ import SwiftUIIntrospect
 
 struct BubbleAudioView: View {
     let item: Message
+    @State private var itemDirection: MessageDirection = .unset
+    @State private var itemHorizontalAlignmnet: HorizontalAlignment = .center
+    @State private var itemBackground: Color = .clear
     @State private var sliderValue: Double = 0.0
     @State private var sliderRange: ClosedRange<Double> = 0...20
     var body: some View {
         HStack {
-            if item.direction == .sent { Spacer() }
+            if itemDirection == .sent { Spacer() }
             HStack {
                 audioAndMessageTextView()
                     .shadow(color: Color(.systemGray3).opacity(0.1), radius: 5, x: 0.0, y: 20.0)
                     .frame(width: UIScreen.main.bounds.width * 0.70, alignment: .leading)
-                    .background(item.backgroundColor)
+                    .background(itemBackground)
                     .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                    .applyTail(direction: item.direction)
+                    .applyTail(direction: itemDirection)
                 
             }
-            if item.direction == .received { Spacer() }
+            if itemDirection == .received { Spacer() }
+        }
+        .task {
+            itemDirection = await item.direction
+            itemHorizontalAlignmnet = await item.horizontalAlignment
+            itemBackground = await item.backgroundColor
         }
     }
     
     private func audioAndMessageTextView() -> some View {
-        VStack(alignment: item.horizontalAlignment, spacing: -15) { // spacing between text and time
+        VStack(alignment: itemHorizontalAlignmnet, spacing: -15) { // spacing between text and time
             HStack(alignment: .center) {
                 playButton()
                 VStack(alignment: .leading) {
@@ -74,7 +82,7 @@ struct BubbleAudioView: View {
                 .foregroundStyle(.gray)
                 .frame(maxWidth: .infinity, alignment: .bottomTrailing)
             
-            if item.direction == .sent {
+            if itemDirection == .sent {
                 Image(.seen)
                     .resizable()
                     .renderingMode(.template)

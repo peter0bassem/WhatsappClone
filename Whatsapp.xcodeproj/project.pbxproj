@@ -51,6 +51,10 @@
 		FA8216B12C7B7706005BE060 /* Message+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216B02C7B7706005BE060 /* Message+Types.swift */; };
 		FA8216B32C7B77C2005BE060 /* MessageFirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216B22C7B77C2005BE060 /* MessageFirebaseManager.swift */; };
 		FA8216B52C7B78EB005BE060 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216B42C7B78EB005BE060 /* MessageService.swift */; };
+		FA8216B72C7BD948005BE060 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216B62C7BD948005BE060 /* ChatViewModel.swift */; };
+		FA8216BA2C7D6989005BE060 /* ChannelCreationTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216B92C7D6988005BE060 /* ChannelCreationTextView.swift */; };
+		FA8216BE2C7D6C4F005BE060 /* AdminMessageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216BD2C7D6C4F005BE060 /* AdminMessageTextView.swift */; };
+		FA8216C12C7D9C04005BE060 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FA8216C02C7D9C04005BE060 /* Kingfisher */; };
 		FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */; };
 		FABC46722C73E2D6008DA69B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46712C73E2D6008DA69B /* Assets.xcassets */; };
 		FABC46752C73E2D6008DA69B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46742C73E2D6008DA69B /* Preview Assets.xcassets */; };
@@ -121,6 +125,9 @@
 		FA8216B02C7B7706005BE060 /* Message+Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+Types.swift"; sourceTree = "<group>"; };
 		FA8216B22C7B77C2005BE060 /* MessageFirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFirebaseManager.swift; sourceTree = "<group>"; };
 		FA8216B42C7B78EB005BE060 /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		FA8216B62C7BD948005BE060 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		FA8216B92C7D6988005BE060 /* ChannelCreationTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCreationTextView.swift; sourceTree = "<group>"; };
+		FA8216BD2C7D6C4F005BE060 /* AdminMessageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMessageTextView.swift; sourceTree = "<group>"; };
 		FABC466A2C73E2D4008DA69B /* Whatsapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whatsapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsappApp.swift; sourceTree = "<group>"; };
 		FABC46712C73E2D6008DA69B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -147,6 +154,7 @@
 			files = (
 				FA121BBA2C77F07A00B2E5DC /* CodableFirebase in Frameworks */,
 				FA121B852C77A96700B2E5DC /* FirebaseMLModelDownloader in Frameworks */,
+				FA8216C12C7D9C04005BE060 /* Kingfisher in Frameworks */,
 				FA121B872C77A96700B2E5DC /* FirebaseStorage in Frameworks */,
 				FA121B832C77A96700B2E5DC /* FirebaseDatabase in Frameworks */,
 				FA121B972C77AF9600B2E5DC /* SwiftUIIntrospect in Frameworks */,
@@ -213,10 +221,7 @@
 		FA121BB52C77D25000B2E5DC /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				FA121BB62C77D25A00B2E5DC /* AuthProviderService.swift */,
-				FA82169C2C78D88B005BE060 /* UserService.swift */,
-				FA8216AE2C7A7955005BE060 /* ChannelService.swift */,
-				FA8216B42C7B78EB005BE060 /* MessageService.swift */,
+				FA8216B82C7BE276005BE060 /* FirebaseServices */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -268,6 +273,17 @@
 				FA8216AA2C7A77C9005BE060 /* String+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FA8216B82C7BE276005BE060 /* FirebaseServices */ = {
+			isa = PBXGroup;
+			children = (
+				FA121BB62C77D25A00B2E5DC /* AuthProviderService.swift */,
+				FA82169C2C78D88B005BE060 /* UserService.swift */,
+				FA8216AE2C7A7955005BE060 /* ChannelService.swift */,
+				FA8216B42C7B78EB005BE060 /* MessageService.swift */,
+			);
+			path = FirebaseServices;
 			sourceTree = "<group>";
 		};
 		FABC46612C73E2D4008DA69B = {
@@ -390,6 +406,9 @@
 				FA8045F52C761DB5005EB72B /* BubbleImageView.swift */,
 				FA8045F72C778221005EB72B /* BubbleAudioView.swift */,
 				FA8045F02C753390005EB72B /* BubbleTailView.swift */,
+				FA8216B62C7BD948005BE060 /* ChatViewModel.swift */,
+				FA8216B92C7D6988005BE060 /* ChannelCreationTextView.swift */,
+				FA8216BD2C7D6C4F005BE060 /* AdminMessageTextView.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -418,6 +437,7 @@
 				FA121B862C77A96700B2E5DC /* FirebaseStorage */,
 				FA121B962C77AF9600B2E5DC /* SwiftUIIntrospect */,
 				FA121BB92C77F07A00B2E5DC /* CodableFirebase */,
+				FA8216C02C7D9C04005BE060 /* Kingfisher */,
 			);
 			productName = Whatsapp;
 			productReference = FABC466A2C73E2D4008DA69B /* Whatsapp.app */;
@@ -451,6 +471,7 @@
 				FA121B7F2C77A96700B2E5DC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				FA121B952C77AF9500B2E5DC /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
 				FA121BB82C77F07A00B2E5DC /* XCRemoteSwiftPackageReference "CodableFirebase" */,
+				FA8216BF2C7D9C04005BE060 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = FABC466B2C73E2D4008DA69B /* Products */;
 			projectDirPath = "";
@@ -498,6 +519,7 @@
 				FABC46952C740EB8008DA69B /* ChatRoomScreen.swift in Sources */,
 				FA121BBF2C77F5FB00B2E5DC /* RootViewModel.swift in Sources */,
 				FA8216B12C7B7706005BE060 /* Message+Types.swift in Sources */,
+				FA8216BE2C7D6C4F005BE060 /* AdminMessageTextView.swift in Sources */,
 				FA121BB22C77CBB700B2E5DC /* SignUpScreen.swift in Sources */,
 				FA82169B2C78C9E3005BE060 /* GroupSetupScreen.swift in Sources */,
 				FA8216A02C78D96C005BE060 /* AuthFirebaseManager.swift in Sources */,
@@ -505,7 +527,9 @@
 				FA121BB72C77D25A00B2E5DC /* AuthProviderService.swift in Sources */,
 				FA8216B32C7B77C2005BE060 /* MessageFirebaseManager.swift in Sources */,
 				FABC46902C74085D008DA69B /* SettingsItemView.swift in Sources */,
+				FA8216B72C7BD948005BE060 /* ChatViewModel.swift in Sources */,
 				FA121BCD2C78B2FD00B2E5DC /* ChatPartnerPickerViewModel.swift in Sources */,
+				FA8216BA2C7D6989005BE060 /* ChannelCreationTextView.swift in Sources */,
 				FA121BC12C77F99300B2E5DC /* SettingsViewModel.swift in Sources */,
 				FA121BA12C77B40300B2E5DC /* LoginScreen.swift in Sources */,
 				FA121B9A2C77B1D100B2E5DC /* FirebaseManager.swift in Sources */,
@@ -759,6 +783,14 @@
 				minimumVersion = 0.2.2;
 			};
 		};
+		FA8216BF2C7D9C04005BE060 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -791,6 +823,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FA121BB82C77F07A00B2E5DC /* XCRemoteSwiftPackageReference "CodableFirebase" */;
 			productName = CodableFirebase;
+		};
+		FA8216C02C7D9C04005BE060 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA8216BF2C7D9C04005BE060 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -204,8 +204,8 @@ final class ChatPartnerPickerViewModel: ObservableObject {
                 id: channelRequest.id,
                 name: channelRequest.name,
                 lastMessage: channelRequest.lastMessage,
-                creationData: .init(timeIntervalSince1970: channelRequest.creationData),
-                lastMessageTimestamp: .init(timeIntervalSinceNow: channelRequest.messageTimestamp),
+                creationData: channelRequest.creationData,
+                lastMessageTimestamp: channelRequest.messageTimestamp,
                 membersCount: channelRequest.membersCount,
                 adminUids: channelRequest.adminUids,
                 memberUids: channelRequest.memberUids,
@@ -247,6 +247,7 @@ struct ChannelCreationRequest: Codable {
 }
 
 struct MessageRequest: Codable {
+    var text: String? = nil
     let type: String
     let timestamp: TimeInterval
     let ownerId: String

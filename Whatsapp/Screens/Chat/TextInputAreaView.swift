@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import Combine
 
 struct TextInputAreaView: View {
-    @State private var messageText: String = ""
+    @Binding var messageText: String
+    var sendMessageSingleObserver: PassthroughSubject<Void, Never>
     var body: some View {
         HStack(alignment: .bottom ,spacing: 5) {
             imagePickerButton()
@@ -63,7 +65,7 @@ struct TextInputAreaView: View {
     
     private func sendMessageButton() -> some View {
         Button {
-            
+            sendMessageSingleObserver.send()
         } label: {
             Image(systemName: "arrow.up")
                 .fontWeight(.heavy)
@@ -73,10 +75,11 @@ struct TextInputAreaView: View {
                 .clipShape(Circle())
                 .padding(.horizontal, 3)
         }
-
+        .disabled(messageText.isEmptyOrWhiteSpace)
+        .grayscale(messageText.isEmptyOrWhiteSpace ? 0.8 : 0.0)
     }
 }
 
 #Preview {
-    TextInputAreaView()
+    TextInputAreaView(messageText: .constant(""), sendMessageSingleObserver: .init())
 }

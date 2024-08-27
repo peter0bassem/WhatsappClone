@@ -15,16 +15,22 @@ struct ChannelTabScreen: View {
             List {
                 archivedButton()
                 
-                ForEach(0..<12) { _ in
+                ForEach(channelViewModel.channels) { channel in
                     NavigationLink {
-                        ChatRoomScreen(channel: .placeholderChannel)
+                        ChatRoomScreen(channel: channel)
                     } label: {
-                        ChannelItemView()
+                        ChannelItemView(channel: channel)
                     }
                 }
                 inboxFooterView()
                     .listRowSeparator(.hidden)
             }
+            .safeAreaInset(edge: .top, content: {
+                Color.clear
+                    .frame(height: 0)
+                    .background(.bar)
+                    .border(.black)
+            })
             .navigationTitle("Chats")
             .searchable(text: $channelViewModel.searchText)
             .listStyle(.plain)
@@ -40,6 +46,9 @@ struct ChannelTabScreen: View {
                 if let newChannel = channelViewModel.newChannel {
                     ChatRoomScreen(channel: newChannel)
                 }
+            }
+            .task {
+                await channelViewModel.fetchCurrentUserChannels()
             }
         }
     }

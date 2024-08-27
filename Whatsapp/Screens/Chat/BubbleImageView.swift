@@ -9,30 +9,40 @@ import SwiftUI
 
 struct BubbleImageView: View {
     let item: Message
+    @State private var itemDirection: MessageDirection = .unset
+    @State private var itemHorizontalAlignmnet: HorizontalAlignment = .center
+    @State private var itemAlignment: Alignment = .center
+    @State private var itemBackground: Color = .clear
     var body: some View {
         HStack {
-            if item.direction == .sent { Spacer() }
+            if itemDirection == .sent { Spacer() }
             HStack {
-                if item.direction == .sent { shareButton() }
+                if itemDirection == .sent { shareButton() }
                 
                 imageAndMessageTextView()
                     .shadow(color: Color(.systemGray3).opacity(0.1), radius: 5, x: 0.0, y: 20.0)
                     .frame(width: UIScreen.main.bounds.width * 0.70, alignment: .leading)
-                    .background(item.backgroundColor)
+                    .background(itemBackground)
                     .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                    .applyTail(direction: item.direction)
+                    .applyTail(direction: itemDirection)
                     .overlay {
                         if item.type == .video { playButton() }
                     }
                 
-                if item.direction == .received { shareButton() }
+                if itemDirection == .received { shareButton() }
             }
-            if item.direction == .received { Spacer() }
+            if itemDirection == .received { Spacer() }
+        }
+        .task {
+            itemDirection = await item.direction
+            itemHorizontalAlignmnet = await item.horizontalAlignment
+            itemAlignment = await item.alignment
+            itemBackground = await item.backgroundColor
         }
     }
     
     private func imageAndMessageTextView() -> some View {
-        VStack(alignment: item.horizontalAlignment, spacing: -15) { // spacing between text and time
+        VStack(alignment: itemHorizontalAlignmnet, spacing: -15) { // spacing between text and time
             
             VStack(alignment: .leading, spacing: 0) { // image and text views
                 Image(.stubImage0)
@@ -45,20 +55,20 @@ struct BubbleImageView: View {
                     .background(rectReader())
                     .padding(5)
                     .overlay(alignment: .bottomTrailing) {
-                        if item.text.isEmpty {
+                        if item.text.removeOptional.isEmptyOrWhiteSpace {
                             timestampView()
                         }
                     }
                     .onTapGesture {
                         
                     }
-                if !item.text.isEmpty {
-                    Text(item.text)
+                if !item.text.removeOptional.isEmptyOrWhiteSpace {
+                    Text(item.text.removeOptional)
                         .padding([.horizontal, .bottom], 8)
-                        .frame(maxWidth: .infinity, alignment: item.alignment)
+                        .frame(maxWidth: .infinity, alignment: itemAlignment)
                 }
             }
-            if !item.text.isEmpty {
+            if !item.text.removeOptional.isEmptyOrWhiteSpace {
                 timestampView()
             }
         }
@@ -99,11 +109,11 @@ struct BubbleImageView: View {
         HStack(spacing: 2 ) {
             Text("3:05 PM")
                 .font(.caption2/*.system(size: 13)*/)
-                .foregroundStyle(item.text.isEmpty ? .white : .gray)
-                .fontWeight(item.text.isEmpty ? .heavy : .regular)
+                .foregroundStyle(item.text.removeOptional.isEmptyOrWhiteSpace ? .white : .gray)
+                .fontWeight(item.text.removeOptional.isEmptyOrWhiteSpace ? .heavy : .regular)
                 .frame(maxWidth: .infinity, alignment: .bottomTrailing)
             
-            if item.direction == .sent {
+            if itemDirection == .sent {
                 Image(.seen)
                     .resizable()
                     .renderingMode(.template)

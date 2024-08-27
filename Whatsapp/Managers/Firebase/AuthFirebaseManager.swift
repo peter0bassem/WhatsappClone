@@ -72,6 +72,7 @@ actor AuthFirebaseManager {
         return Auth.auth().currentUser != nil
     }
     
+    /// Fetching current user info with async/let
     static func fetchCurrentUserInfo() async -> User? {
         guard let currentUid = Auth.auth().currentUser?.uid else { return nil }
         do {
@@ -84,26 +85,28 @@ actor AuthFirebaseManager {
             print("Failed to get current user info \(error.localizedDescription)")
             return nil
         }
-        
-//        return await withCheckedContinuation { continuation in
-//            guard let currentUid = Auth.auth().currentUser?.uid else { /*continuation.resume(returning: nil);*/ return }
-//            FirebaseReferenceConstants.usersRef.child(currentUid)
-//                .observe(.value) { snapshot in
-//                    guard let value = snapshot.value else { continuation.resume(returning: nil); return }
-//                    do {
-//                        let user = try FirebaseDecoder().decode(User.self, from: value)
-//                        print("🔐 logged in user: \(user)")
-//                        continuation.resume(returning: user)
-//                    } catch {
-//                        print("Failed to decode user snapshot.value \(error.localizedDescription)")
-//                        return
-//                    }
-//                } withCancel: { error in
-//                    print("Failed to get current user info \(error.localizedDescription)")
-//                    return
-//                }
-//        }
     }
+    /// Fetching current user info with Continuation
+    //    static func fetchCurrentUserInfo() async -> User? {
+    //        return await withCheckedContinuation { continuation in
+    //            guard let currentUid = Auth.auth().currentUser?.uid else { continuation.resume(returning: nil); return }
+    //            FirebaseReferenceConstants.UsersRef.child(currentUid)
+    //                .observe(.value) { snapshot in
+    //                    guard let value = snapshot.value else { continuation.resume(returning: nil); return }
+    //                    do {
+    //                        let user = try FirebaseDecoder().decode(User.self, from: value)
+    //                        print("🔐 logged in user: \(user)")
+    //                        continuation.resume(returning: user)
+    //                    } catch {
+    //                        print("Failed to decode user snapshot.value \(error.localizedDescription)")
+    //                        return
+    //                    }
+    //                } withCancel: { error in
+    //                    print("Failed to get current user info \(error.localizedDescription)")
+    //                    return
+    //                }
+    //        }
+    //    }
     
     static func getCurrentUserId() -> String? {
         Auth.auth().currentUser?.uid

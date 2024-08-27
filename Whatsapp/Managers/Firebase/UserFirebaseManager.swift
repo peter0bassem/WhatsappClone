@@ -36,6 +36,36 @@ actor UserFirebaseManager {
         }
         return .emptyNode
     }
+    
+    static func getUsers(withUserIds userIds: [String]) async -> [User] {
+        return await withCheckedContinuation { continuation in
+            Task {
+                do {
+                    let users = try await withThrowingTaskGroup(of: User?.self) { group in
+                        for userId in userIds {
+                            group.addTask {
+                                let snapshot = try await FirebaseReferenceConstants.UsersRef.child(userId).getData()
+                                guard let value = snapshot.value else { return nil }
+                                return try FirebaseDecoder().decode(User.self, from: value)
+                            }
+                        }
+                        
+                        var collectedUsers: [User] = []
+                        for try await user in group {
+                            if let user = user {
+                                collectedUsers.append(user)
+                            }
+                        }
+                        return collectedUsers
+                    }
+                    continuation.resume(returning: users)
+                } catch {
+                    print("Failed to fetch users: \(error.localizedDescription)")
+                    continuation.resume(returning: [])
+                }
+            }
+        }
+    }
 }
 
 struct UserNode {

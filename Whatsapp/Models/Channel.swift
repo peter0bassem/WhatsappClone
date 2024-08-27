@@ -8,27 +8,37 @@
 import Foundation
 
 struct Channel: Identifiable, Codable {
-    var id: String
+    var id: String?
     var name: String?
     var lastMessage: String
-    var creationData: Date
-    var lastMessageTimestamp: Date
-    var membersCount: UInt
-    var adminUids: [String]
-    var memberUids: [String]
-    var members: [User] = []
+    var creationData: TimeInterval?
+    var lastMessageTimestamp: TimeInterval
+    var membersCount: UInt?
+    var adminUids: [String]?
+    var memberUids: [String]?
+    var members: [User]?
     var thumbinalUrl: String?
-    var createdBy: String
+    var createdBy: String?
     
     var isGroupChat: Bool {
-        membersCount > 2
+        (membersCount ?? 0) > 2
     }
     
     var membersExcludingMe: [User] {
         get async {
             guard let currentUid = await AuthProviderServiceImp.shared.getCurrentUserId() else { return [] }
-            return members.filter { $0.uid != currentUid }
+            return (members ?? []).filter { $0.uid != currentUid }
         }
+    }
+    
+    var isCreatedByMe: Bool {
+        get async {
+            return await AuthProviderServiceImp.shared.getCurrentUserId() == createdBy
+        }
+    }
+    
+    var creatorName: String {
+        return members?.first(where: { $0.uid == createdBy })?.username ?? "Someone"
     }
     
     var title: String {
