@@ -184,6 +184,10 @@ final class ChatPartnerPickerViewModel: ObservableObject {
             channelRequest = channelRequest.updateChannelName(newChannelName: channelName)
         }
         let messageRequest = MessageRequest(type: newChannelBroadcast, timestamp: timestamp, ownerId: currentUid)
+        var allMembers: [User]?
+        if !isDirectChannel {
+            allMembers = await UserServiceImp.shared.getUsers(withUserIds: membersUids)
+        }
         
         do {
             try await ChannelServiceImp.shared.createChannel(channelRequest, withChannelKey: channelId)
@@ -209,7 +213,7 @@ final class ChatPartnerPickerViewModel: ObservableObject {
                 membersCount: channelRequest.membersCount,
                 adminUids: channelRequest.adminUids,
                 memberUids: channelRequest.memberUids,
-                members: selectedChatPartners,
+                members: isDirectChannel ? selectedChatPartners : allMembers /*allMembers*/ /*selectedChatPartners*/,
                 thumbinalUrl: channelRequest.thumbnailUrl,
                 createdBy: channelRequest.createdBy
             )

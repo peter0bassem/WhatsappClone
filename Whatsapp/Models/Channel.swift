@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Channel: Identifiable, Codable {
+struct Channel: Identifiable, Codable, Hashable {
     var id: String?
     var name: String?
     var lastMessage: String
@@ -64,6 +64,13 @@ struct Channel: Identifiable, Codable {
                 return await membersExcludingMe.first?.username ?? "Unknown"
             }
         }
+    }
+    
+    var allMembersFetched: Bool {
+        if isGroupChat {
+            return members?.count == memberUids?.count
+        }
+        return members?.count == ((memberUids?.count ?? 0) - 1)
     }
     
     private var groupMemberNames: String {

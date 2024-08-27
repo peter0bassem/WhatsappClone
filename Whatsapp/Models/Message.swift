@@ -62,5 +62,5 @@ struct Message: Identifiable, Codable {
     ]
 
     static let sentPlaceholder = Message(id: UUID().uuidString, text: "Holy Spagetti, this is a dummy text for multi-line text view testing purpose.", type: .text, ownerId: "RfZDo1E35IVnZUH4C14pEgr7wxH2", timestamp: nil)
-    static let receivedPlaceholder = Message(id: UUID().uuidString, text: "", type: .text, ownerId: "2", timestamp: nil) //Message(text: "", type: .text/*(message: "")*/, direction: .received) //Hey dude, whats up!
+    static let receivedPlaceholder = Message(id: UUID().uuidString, text: "", type: .text, ownerId: "2", timestamp: nil)
 }

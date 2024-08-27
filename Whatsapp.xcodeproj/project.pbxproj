@@ -56,6 +56,7 @@
 		FA8216BE2C7D6C4F005BE060 /* AdminMessageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216BD2C7D6C4F005BE060 /* AdminMessageTextView.swift */; };
 		FA8216C12C7D9C04005BE060 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FA8216C02C7D9C04005BE060 /* Kingfisher */; };
 		FA8216C32C7D9C66005BE060 /* CircleProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216C22C7D9C66005BE060 /* CircleProfileImageView.swift */; };
+		FABC367E2C7DEF1200BDCB30 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC367D2C7DEF1200BDCB30 /* Date+Extensions.swift */; };
 		FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */; };
 		FABC46722C73E2D6008DA69B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46712C73E2D6008DA69B /* Assets.xcassets */; };
 		FABC46752C73E2D6008DA69B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46742C73E2D6008DA69B /* Preview Assets.xcassets */; };
@@ -130,6 +131,7 @@
 		FA8216B92C7D6988005BE060 /* ChannelCreationTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCreationTextView.swift; sourceTree = "<group>"; };
 		FA8216BD2C7D6C4F005BE060 /* AdminMessageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMessageTextView.swift; sourceTree = "<group>"; };
 		FA8216C22C7D9C66005BE060 /* CircleProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImageView.swift; sourceTree = "<group>"; };
+		FABC367D2C7DEF1200BDCB30 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		FABC466A2C73E2D4008DA69B /* Whatsapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whatsapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsappApp.swift; sourceTree = "<group>"; };
 		FABC46712C73E2D6008DA69B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				FA8216AA2C7A77C9005BE060 /* String+Extensions.swift */,
+				FABC367D2C7DEF1200BDCB30 /* Date+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				FABC46802C73F755008DA69B /* CallTabScreen.swift in Sources */,
 				FABC46882C73FE48008DA69B /* CommunityTabScreen.swift in Sources */,
 				FABC468A2C740115008DA69B /* ChannelTabScreen.swift in Sources */,
+				FABC367E2C7DEF1200BDCB30 /* Date+Extensions.swift in Sources */,
 				FA8216AF2C7A7955005BE060 /* ChannelService.swift in Sources */,
 				FA8216AD2C7A7936005BE060 /* ChannelFirebaseManager.swift in Sources */,
 				FA121BCF2C78B50B00B2E5DC /* GroupPartnerPickerScreen.swift in Sources */,

@@ -11,7 +11,7 @@ import Combine
 protocol MessageService: Actor {
     static var shared: MessageService { get }
     func sendMessage(toChannel channelId: String, messageId: String, messageRequest: MessageRequest) throws
-    func fetchUserChannels(withUserId userId: String) async throws -> [Channel]
+    func fetchUserChannels(withUserId userId: String) -> AnyPublisher<[Channel], Error>
     func sendTextMessage(toChannel channel: Channel, fromUser user: User, textMessage: String) async throws
     func getMessages(forChannel channel: Channel) -> AnyPublisher<[Message], Error>
 }
@@ -27,8 +27,8 @@ final actor MessageServiceImpl: MessageService {
         try MessageFirebaseManager.sendMessage(toChannel: channelId, messageId: messageId, messageRequest: messageRequest)
     }
     
-    func fetchUserChannels(withUserId userId: String) async throws -> [Channel] {
-        try await MessageFirebaseManager.fetchUserChannels(withUserId: userId)
+    func fetchUserChannels(withUserId userId: String) -> AnyPublisher<[Channel], Error> {
+        MessageFirebaseManager.fetchUserChannels(withUserId: userId)
     }
     
     func sendTextMessage(toChannel channel: Channel, fromUser user: User, textMessage: String) async throws {

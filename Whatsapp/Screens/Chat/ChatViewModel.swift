@@ -14,12 +14,24 @@ final class ChatViewModel: ObservableObject {
     @Published var currentUser: User?
     @Published var messages: [Message] = []
     var sendMessageSingleObserver = PassthroughSubject<Void, Never>()
-    private let channel: Channel
+    private var channel: Channel
     
     private var cancellables = Set<AnyCancellable>()
     
     init(channel: Channel) {
         self.channel = channel
+        Task {
+            print("channel \(await self.channel.title) members: \(self.channel.members?.compactMap { $0.username })")
+            guard let currentUserUid = await AuthProviderServiceImp.shared.getCurrentUserId(),
+                  let members = channel.members,
+                  let currentUserIndexSet = members.firstIndex(where: { $0.uid == currentUserUid })
+            else { return }
+            
+            self.channel.members?.move(fromIndex: currentUserIndexSet, toIndex: 0)
+            print("channel \(await self.channel.title) sorted members: \(self.channel.members?.compactMap { $0.username })")
+            print("================================================================")
+            
+        }
         observerListeners()
         Task {
             await listenToAuthState()
@@ -96,6 +108,23 @@ final class ChatViewModel: ObservableObject {
                     self?.messages = messages.sorted(by: { ($0.timestamp ?? 0.0) < ($1.timestamp ?? 0.0) })
                 })
                 .store(in: &cancellables)
+        }
+    }
+}
+
+extension Array {
+    mutating func move(fromIndex: Int, toIndex: Int) {
+        guard fromIndex != toIndex,
+              indices.contains(fromIndex),
+              indices.contains(toIndex) else { return }
+
+        let element = self[fromIndex]
+        remove(at: fromIndex)
+
+        if toIndex > fromIndex {
+            insert(element, at: toIndex - 1)
+        } else {
+            insert(element, at: toIndex)
         }
     }
 }

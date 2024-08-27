@@ -11,16 +11,16 @@ struct ChannelTabScreen: View {
     
     @ObservedObject private var channelViewModel = ChannelViewModel()
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $channelViewModel.navRoutes) {
             List {
                 archivedButton()
                 
                 ForEach(channelViewModel.channels) { channel in
-                    NavigationLink {
-                        ChatRoomScreen(channel: channel)
-                    } label: {
-                        ChannelItemView(channel: channel)
-                    }
+                    ChannelItemView(channel: channel)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            channelViewModel.navRoutes.append(.chatRoont(channel: channel))
+                        }
                 }
                 inboxFooterView()
                     .listRowSeparator(.hidden)
@@ -39,6 +39,9 @@ struct ChannelTabScreen: View {
                 leadingNavItems()
                 trailingNavItems()
             }
+            .navigationDestination(for: ChannelTabRoutes.self, destination: { route in
+                destinationView(for: route)
+            })
             .sheet(isPresented: $channelViewModel.showChartPartnerPickerView) {
                 ChatPartnerPickerScreen(onCreate: channelViewModel.onNewChannelCreation)
             }
@@ -50,6 +53,14 @@ struct ChannelTabScreen: View {
             .task {
                 await channelViewModel.fetchCurrentUserChannels()
             }
+        }
+    }
+    
+    @ViewBuilder
+    private func destinationView(for route: ChannelTabRoutes) -> some View {
+        switch route {
+        case .chatRoont(let channel):
+            ChatRoomScreen(channel: channel)
         }
     }
     

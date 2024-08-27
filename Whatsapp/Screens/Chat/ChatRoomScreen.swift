@@ -14,6 +14,7 @@ struct ChatRoomScreen: View {
     @State private var channelName: String = ""
     @StateObject private var chatViewModel: ChatViewModel
     @State private var hideToolbar: Bool = false
+    @State private var circleProfileImageView = CircleProfileImageView(profileImageUrl: nil, size: .medium)
     
     init(channel: Channel) {
         self.channel = channel
@@ -72,6 +73,9 @@ struct ChatRoomScreen: View {
             TextInputAreaView(messageText: $chatViewModel.messageText, sendMessageSingleObserver: chatViewModel.sendMessageSingleObserver)
         }
         .toolbar(hideToolbar ? .hidden : .visible, for: .tabBar)
+        .task {
+            circleProfileImageView = await CircleProfileImageView(channel: channel, size: .mini)
+        }
         .onAppear {
             hideToolbar = true
         }
@@ -82,21 +86,26 @@ struct ChatRoomScreen: View {
 }
 
 private extension ChatRoomScreen {
+    private var channelTitle: String {
+        let maxChar = 20
+        let trailingChars = channelName.count > maxChar ? "..." : ""
+        return String(channelName.prefix(maxChar) + trailingChars)
+    }
+    
     @ToolbarContentBuilder
     private func leadingNavItems() -> some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             HStack {
-                Circle()
-                    .frame(width: 35, height: 35)
+                circleProfileImageView
                 VStack(alignment: .leading) {
-                    Text(channelName)
+                    Text(channelTitle)
                         .bold()
                         .task {
                             channelName = await channel.title
                         }
-                    Text("Online")
-                        .font(.system(size: 12))
-                        .foregroundStyle(.gray)
+//                    Text("Online")
+//                        .font(.system(size: 12))
+//                        .foregroundStyle(.gray)
                 }
             }
         }
