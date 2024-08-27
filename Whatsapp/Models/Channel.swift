@@ -17,8 +17,20 @@ struct Channel: Identifiable, Codable {
     var adminUids: [String]?
     var memberUids: [String]?
     var members: [User]?
-    var thumbinalUrl: String?
+    private var thumbinalUrl: String?
     var createdBy: String?
+    
+    var coverImageUrl: String? {
+        get async {
+            if let thumbinalUrl = thumbinalUrl {
+                return thumbinalUrl
+            }
+            if !isGroupChat {
+                return await membersExcludingMe.first?.profileImageUrl
+            }
+            return nil
+        }
+    }
     
     var isGroupChat: Bool {
         (membersCount ?? 0) > 2
@@ -82,6 +94,20 @@ struct Channel: Identifiable, Codable {
         case memberUids
         case thumbinalUrl
         case createdBy
+    }
+    
+    init(id: String? = nil, name: String? = nil, lastMessage: String, creationData: TimeInterval? = nil, lastMessageTimestamp: TimeInterval, membersCount: UInt? = nil, adminUids: [String]? = nil, memberUids: [String]? = nil, members: [User]? = nil, thumbinalUrl: String? = nil, createdBy: String? = nil) {
+        self.id = id
+        self.name = name
+        self.lastMessage = lastMessage
+        self.creationData = creationData
+        self.lastMessageTimestamp = lastMessageTimestamp
+        self.membersCount = membersCount
+        self.adminUids = adminUids
+        self.memberUids = memberUids
+        self.members = members
+        self.thumbinalUrl = thumbinalUrl
+        self.createdBy = createdBy
     }
     
     static let placeholderChannel: Channel = .init(id: "1", lastMessage: "Hello World", creationData: .init(), lastMessageTimestamp: .init(), membersCount: 2, adminUids: [], memberUids: [], members: [], thumbinalUrl: nil, createdBy: "")

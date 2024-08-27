@@ -55,6 +55,7 @@
 		FA8216BA2C7D6989005BE060 /* ChannelCreationTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216B92C7D6988005BE060 /* ChannelCreationTextView.swift */; };
 		FA8216BE2C7D6C4F005BE060 /* AdminMessageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216BD2C7D6C4F005BE060 /* AdminMessageTextView.swift */; };
 		FA8216C12C7D9C04005BE060 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FA8216C02C7D9C04005BE060 /* Kingfisher */; };
+		FA8216C32C7D9C66005BE060 /* CircleProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216C22C7D9C66005BE060 /* CircleProfileImageView.swift */; };
 		FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */; };
 		FABC46722C73E2D6008DA69B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46712C73E2D6008DA69B /* Assets.xcassets */; };
 		FABC46752C73E2D6008DA69B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FABC46742C73E2D6008DA69B /* Preview Assets.xcassets */; };
@@ -128,6 +129,7 @@
 		FA8216B62C7BD948005BE060 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		FA8216B92C7D6988005BE060 /* ChannelCreationTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCreationTextView.swift; sourceTree = "<group>"; };
 		FA8216BD2C7D6C4F005BE060 /* AdminMessageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMessageTextView.swift; sourceTree = "<group>"; };
+		FA8216C22C7D9C66005BE060 /* CircleProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImageView.swift; sourceTree = "<group>"; };
 		FABC466A2C73E2D4008DA69B /* Whatsapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whatsapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsappApp.swift; sourceTree = "<group>"; };
 		FABC46712C73E2D6008DA69B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			children = (
 				FA121BAD2C77B9E400B2E5DC /* AuthTextField.swift */,
 				FA121BAF2C77C24500B2E5DC /* AuthButton.swift */,
+				FA8216C22C7D9C66005BE060 /* CircleProfileImageView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 				FABC46952C740EB8008DA69B /* ChatRoomScreen.swift in Sources */,
 				FA121BBF2C77F5FB00B2E5DC /* RootViewModel.swift in Sources */,
 				FA8216B12C7B7706005BE060 /* Message+Types.swift in Sources */,
+				FA8216C32C7D9C66005BE060 /* CircleProfileImageView.swift in Sources */,
 				FA8216BE2C7D6C4F005BE060 /* AdminMessageTextView.swift in Sources */,
 				FA121BB22C77CBB700B2E5DC /* SignUpScreen.swift in Sources */,
 				FA82169B2C78C9E3005BE060 /* GroupSetupScreen.swift in Sources */,

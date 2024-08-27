@@ -10,15 +10,18 @@ import SwiftUI
 struct ChannelItemView: View {
     let channel: Channel
     @State private var channelTitle: String = ""
+    @State private var circleProfileImageView: CircleProfileImageView = CircleProfileImageView(profileImageUrl: nil, size: .small)
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
-            Circle()
-                .frame(width: 60, height: 60)
+            circleProfileImageView
             
             VStack(alignment: .leading, spacing: 3) {
                 titleView()
                 lastMessagePreview()
             }
+        }
+        .task {
+            circleProfileImageView = await CircleProfileImageView(channel: channel, size: .medium)
         }
     }
     
