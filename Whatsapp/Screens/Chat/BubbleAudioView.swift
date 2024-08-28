@@ -13,15 +13,25 @@ struct BubbleAudioView: View {
     @State private var itemDirection: MessageDirection = .unset
     @State private var itemHorizontalAlignmnet: HorizontalAlignment = .center
     @State private var itemBackground: Color = .clear
+    @State private var showGroupPartnerInfo: Bool = false
     @State private var sliderValue: Double = 0.0
     @State private var sliderRange: ClosedRange<Double> = 0...20
     var body: some View {
         HStack {
             if itemDirection == .sent { Spacer() }
-            HStack {
+            HStack(alignment: .bottom, spacing: 5) {
+                if itemDirection == .received {
+                    if showGroupPartnerInfo {
+                        CircleProfileImageView(profileImageUrl: item.sender?.profileImageUrl, size: .mini)
+                            .offset(y: 5)
+                    }
+                }
                 audioAndMessageTextView()
                     .shadow(color: Color(.systemGray3).opacity(0.1), radius: 5, x: 0.0, y: 20.0)
                     .frame(width: UIScreen.main.bounds.width * 0.70, alignment: .leading)
+                    .background(Color.gray.opacity(0.1))
+                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    .padding(5)
                     .background(itemBackground)
                     .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                     .applyTail(direction: itemDirection)
@@ -33,6 +43,7 @@ struct BubbleAudioView: View {
             itemDirection = await item.direction
             itemHorizontalAlignmnet = await item.horizontalAlignment
             itemBackground = await item.backgroundColor
+            showGroupPartnerInfo = await item.showGroupPartnerInfo
         }
     }
     
@@ -78,7 +89,7 @@ struct BubbleAudioView: View {
     private func timestampView() -> some View {
         HStack(spacing: 2 ) {
             Text("3:05 PM")
-                .font(.caption2/*.system(size: 13)*/)
+                .font(.footnote/*.system(size: 13)*/)
                 .foregroundStyle(.gray)
                 .frame(maxWidth: .infinity, alignment: .bottomTrailing)
             
@@ -99,6 +110,7 @@ struct BubbleAudioView: View {
         VStack {
             BubbleAudioView(item: .sentPlaceholder)
             BubbleAudioView(item: .receivedPlaceholder)
+            BubbleAudioView(item: .init(id: "", isGroupChat: true, text: nil, type: .audio, ownerId: "", timestamp: nil))
         }
         .padding(.horizontal, 10)
     }

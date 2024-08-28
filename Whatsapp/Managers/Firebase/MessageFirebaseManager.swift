@@ -117,7 +117,7 @@ actor MessageFirebaseManager {
                 // Mapping and decoding the messages
                 let messages = try value.map { (messageId: $0.key, message: $0.value) }
                                         .map { (messageId: $0.messageId, message: try FirebaseDecoder().decode(Message.self, from: $0.message)) }
-                                        .map { Message(id: $0.messageId, text: $0.message.text, type: $0.message.type, ownerId: $0.message.ownerId, timestamp: $0.message.timestamp) }
+                                        .map { Message(id: $0.messageId, isGroupChat: channel.isGroupChat, text: $0.message.text, type: $0.message.type, ownerId: $0.message.ownerId, timestamp: $0.message.timestamp) }
                 
                 // Send the new messages to the subscriber
                 subject.send(messages)

@@ -13,31 +13,44 @@ struct BubbleImageView: View {
     @State private var itemHorizontalAlignmnet: HorizontalAlignment = .center
     @State private var itemAlignment: Alignment = .center
     @State private var itemBackground: Color = .clear
+    @State private var showGroupPartnerInfo: Bool = false
     var body: some View {
         HStack {
             if itemDirection == .sent { Spacer() }
-            HStack {
+            
+            HStack() {
                 if itemDirection == .sent { shareButton() }
                 
-                imageAndMessageTextView()
-                    .shadow(color: Color(.systemGray3).opacity(0.1), radius: 5, x: 0.0, y: 20.0)
-                    .frame(width: UIScreen.main.bounds.width * 0.70, alignment: .leading)
-                    .background(itemBackground)
-                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                    .applyTail(direction: itemDirection)
-                    .overlay {
-                        if item.type == .video { playButton() }
+                HStack(alignment: .bottom, spacing: 5) {
+                    if itemDirection == .received {
+                        if showGroupPartnerInfo {
+                            CircleProfileImageView(profileImageUrl: item.sender?.profileImageUrl, size: .mini)
+                                .offset(y: 5)
+                        }
                     }
+                    
+                    imageAndMessageTextView()
+                        .shadow(color: Color(.systemGray3).opacity(0.1), radius: 5, x: 0.0, y: 20.0)
+                        .frame(width: UIScreen.main.bounds.width * 0.70, alignment: .leading)
+                        .background(itemBackground)
+                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                        .applyTail(direction: itemDirection)
+                        .overlay {
+                            if item.type == .video { playButton() }
+                        }
+                }
                 
                 if itemDirection == .received { shareButton() }
             }
             if itemDirection == .received { Spacer() }
         }
+        .frame(maxWidth: .infinity, alignment: itemAlignment)
         .task {
             itemDirection = await item.direction
             itemHorizontalAlignmnet = await item.horizontalAlignment
             itemAlignment = await item.alignment
             itemBackground = await item.backgroundColor
+            showGroupPartnerInfo = await item.showGroupPartnerInfo
         }
     }
     
@@ -108,7 +121,7 @@ struct BubbleImageView: View {
     private func timestampView() -> some View {
         HStack(spacing: 2 ) {
             Text("3:05 PM")
-                .font(.caption2/*.system(size: 13)*/)
+                .font(.footnote/*.system(size: 13)*/)
                 .foregroundStyle(item.text.removeOptional.isEmptyOrWhiteSpace ? .white : .gray)
                 .fontWeight(item.text.removeOptional.isEmptyOrWhiteSpace ? .heavy : .regular)
                 .frame(maxWidth: .infinity, alignment: .bottomTrailing)
@@ -130,6 +143,8 @@ struct BubbleImageView: View {
         VStack {
             BubbleImageView(item: .sentPlaceholder)
             BubbleImageView(item: .receivedPlaceholder)
+            BubbleImageView(item: .init(id: "", isGroupChat: true, text: nil, type: .photo, ownerId: "", timestamp: nil))
+            
         }
         .padding(.horizontal, 10)
     }
