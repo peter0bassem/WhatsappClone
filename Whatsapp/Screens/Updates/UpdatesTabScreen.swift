@@ -83,7 +83,7 @@ private struct StatusSectionHeaderView: View {
                 .foregroundStyle(.gray)
         }
         .padding()
-        .background(Color.white)
+        .background(.whatsAppWhite)
         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 }

@@ -10,7 +10,7 @@ import Combine
 
 struct TextInputAreaView: View {
     @Binding var messageText: String
-    var sendMessageSingleObserver: PassthroughSubject<Void, Never>
+    var actionObserver: PassthroughSubject<UserAction, Never>
     var body: some View {
         HStack(alignment: .bottom ,spacing: 5) {
             imagePickerButton()
@@ -39,7 +39,7 @@ struct TextInputAreaView: View {
     
     private func imagePickerButton() -> some View {
         Button {
-            
+            actionObserver.send(.presentPhotoPicker)
         } label: {
             Image(systemName: "photo.on.rectangle")
                 .font(.system(size: 22))
@@ -65,7 +65,7 @@ struct TextInputAreaView: View {
     
     private func sendMessageButton() -> some View {
         Button {
-            sendMessageSingleObserver.send()
+            actionObserver.send(.sendMessage)
         } label: {
             Image(systemName: "arrow.up")
                 .fontWeight(.heavy)
@@ -80,6 +80,15 @@ struct TextInputAreaView: View {
     }
 }
 
+//extension TextInputAreaView {
+    enum UserAction {
+        case presentPhotoPicker
+        case sendMessage
+        case play(item: MediaAttachment)
+        case removeItem(item: MediaAttachment)
+    }
+//}
+
 #Preview {
-    TextInputAreaView(messageText: .constant(""), sendMessageSingleObserver: .init())
+    TextInputAreaView(messageText: .constant(""), actionObserver: .init())
 }

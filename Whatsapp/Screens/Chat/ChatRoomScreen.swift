@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-import Combine
-import SwiftUIIntrospect
+import PhotosUI
 
 struct ChatRoomScreen: View {
     let channel: Channel
@@ -62,15 +61,16 @@ struct ChatRoomScreen: View {
             Image(.chatbackground)
                 .resizable()
                 .scaledToFill()
-//                .ignoresSafeArea(edges: [.leading, .bottom, .trailing])
         )
         .toolbar {
             leadingNavItems()
             trailingNavItems()
         }
         .scrollIndicators(.hidden)
+        .photosPicker(isPresented: $chatViewModel.showPhotoPicker, selection: $chatViewModel.photoPickerItems, maxSelectionCount: 6, photoLibrary: .shared()) //photoLibrary is added for item deletion from picker.
         .safeAreaInset(edge: .bottom) {
-            TextInputAreaView(messageText: $chatViewModel.messageText, sendMessageSingleObserver: chatViewModel.sendMessageSingleObserver)
+            bottomSafeAreaView()
+                .background(.whatsAppWhite)
         }
         .toolbar(hideToolbar ? .hidden : .visible, for: .tabBar)
         .task {
@@ -82,6 +82,25 @@ struct ChatRoomScreen: View {
         .onDisappear {
             hideToolbar = false
         }
+        .fullScreenCover(isPresented: $chatViewModel.videoPlayerState.show) {
+            if let player = chatViewModel.videoPlayerState.player {
+                MediaPlayerView(player: player ) {
+                    chatViewModel.dismissMediaPlayer()
+                }
+            }
+        }
+    }
+    
+    private func bottomSafeAreaView() -> some View {
+        VStack(spacing: 0) {
+            if chatViewModel.showPhotoPickerPreview {
+                MediaAttachmentPreviewView(attachments: chatViewModel.selectedAttachments, actionObserver: chatViewModel.actionObserver)
+                    .transition(.move(edge: .bottom))
+                Divider()
+            }
+            TextInputAreaView(messageText: $chatViewModel.messageText, actionObserver: chatViewModel.actionObserver)
+        }
+        .animation(.easeInOut, value: chatViewModel.showPhotoPickerPreview)
     }
 }
 

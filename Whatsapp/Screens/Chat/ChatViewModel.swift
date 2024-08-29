@@ -7,16 +7,27 @@
 
 import Foundation
 import Combine
+import PhotosUI
+import SwiftUI
 
 @MainActor
 final class ChatViewModel: ObservableObject {
     @Published var messageText: String = ""
     @Published var currentUser: User?
     @Published var messages: [Message] = []
-    var sendMessageSingleObserver = PassthroughSubject<Void, Never>()
+    @Published var showPhotoPicker: Bool = false
+    @Published var photoPickerItems: [PhotosPickerItem] = []
+    @Published var selectedAttachments: [MediaAttachment] = []
+    @Published var videoPlayerState: (show: Bool, player: AVPlayer?) = (false, nil)
+    var actionObserver = PassthroughSubject<UserAction, Never>()
     private var channel: Channel
     
+    var showPhotoPickerPreview: Bool {
+        !photoPickerItems.isEmpty || !selectedAttachments.isEmpty
+    }
+    
     private var cancellables = Set<AnyCancellable>()
+    private var previousPhotoPickerItems: [PhotosPickerItem] = []
     
     init(channel: Channel) {
         self.channel = channel
@@ -36,6 +47,44 @@ final class ChatViewModel: ObservableObject {
         Task {
             await listenToAuthState()
         }
+        
+       
+        
+        $photoPickerItems
+            .dropFirst()
+            .sink { [weak self] photoItems in
+                guard let self = self else { return }
+                if photoItems.count > self.previousPhotoPickerItems.count {
+                    Task {
+                        self.selectedAttachments = []
+                        for photoPickerItem in self.photoPickerItems {
+                            if photoPickerItem.isVideo {
+                                do {
+                                    if let movie = try await photoPickerItem.loadTransferable(type: VideoPickerTranferable.self),
+                                       let thumbnailImage = try await movie.url.generateThumbnail() {
+                                        let videoAttachment = MediaAttachment(id: photoPickerItem.itemIdentifier, type: .video(thumbnailImage: thumbnailImage, videoURL: movie.url))
+                                        self.selectedAttachments.insert(videoAttachment, at: 0)
+                                    }
+                                } catch {
+                                    
+                                }
+                            } else {
+                                do {
+                                    guard let data = try await photoPickerItem.loadTransferable(type: Data.self),
+                                          let uiImage = UIImage(data: data)
+                                    else { return }
+                                    let photoAttachment = MediaAttachment(id: photoPickerItem.itemIdentifier, type: .photo(imageAttachment: uiImage))
+                                    self.selectedAttachments.insert(photoAttachment, at: 0)
+                                } catch {
+                                    print("Failed to get uiimage from image \(error)")
+                                }
+                            }
+                        }
+                    }
+                }
+                self.previousPhotoPickerItems = photoItems
+            }
+            .store(in: &cancellables)
     }
     
     deinit {
@@ -47,9 +96,27 @@ final class ChatViewModel: ObservableObject {
     }
     
     private func observerListeners() {
-        sendMessageSingleObserver
-            .sink { [weak self] _ in
-                self?.sendMessage()
+        actionObserver
+            .sink { [weak self] action in
+                switch action {
+                case .presentPhotoPicker:
+                    self?.showPhotoPicker.toggle()
+                case .sendMessage:
+                    self?.sendMessage()
+                case .play(let attachment):
+                    guard let fileURL = attachment.fileURL else { return }
+                    self?.showMediaPlayer(for: fileURL)
+                case .removeItem(let item):
+                    withAnimation {
+                        guard let self = self,
+                              let itemIndex = self.selectedAttachments.firstIndex(where: { $0.id == item.id }),
+                              let photoItemIndex = self.photoPickerItems.firstIndex(where: { $0.itemIdentifier == item.id })
+                        else { return }
+                        self.selectedAttachments.remove(at: itemIndex)
+                        self.photoPickerItems.remove(at: photoItemIndex)
+                    }
+                    
+                }
             }
             .store(in: &cancellables)
     }
@@ -109,6 +176,17 @@ final class ChatViewModel: ObservableObject {
                 })
                 .store(in: &cancellables)
         }
+    }
+    
+    func showMediaPlayer(for fileURL: URL) {
+        videoPlayerState.show = true
+        videoPlayerState.player = .init(url: fileURL)
+    }
+    
+    func dismissMediaPlayer() {
+        videoPlayerState.player?.replaceCurrentItem(with: nil)
+        videoPlayerState.player = nil
+        videoPlayerState.show = false
     }
 }
 
