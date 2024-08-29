@@ -98,7 +98,7 @@ struct ChatRoomScreen: View {
                     .transition(.move(edge: .bottom))
                 Divider()
             }
-            TextInputAreaView(messageText: $chatViewModel.messageText, actionObserver: chatViewModel.actionObserver)
+            TextInputAreaView(messageText: $chatViewModel.messageText, isRecording: $chatViewModel.isRecordingVoiceMessage, elapsedTime: $chatViewModel.elapsedVoiceMessageTime, actionObserver: chatViewModel.actionObserver)
         }
         .animation(.easeInOut, value: chatViewModel.showPhotoPickerPreview)
     }

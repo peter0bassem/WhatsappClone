@@ -16,7 +16,7 @@ struct MediaAttachmentPreviewView: View {
             LazyHStack(spacing: 10) {
                 ForEach(attachments) { attachment in
                     switch attachment.type {
-                    case .photo(_), .video(_, _):
+                    case .photo, .video:
                         thumbnailImageView(attachment: attachment)
                     case .audio:
                         audioAttachmentPreview(attachment: attachment)
@@ -34,7 +34,11 @@ struct MediaAttachmentPreviewView: View {
     private func thumbnailImageView(attachment: MediaAttachment) -> some View {
         ZStack {
             Button {
-                
+                switch attachment.type {
+                case .photo:
+                    print("Trying to full screen image")
+                default: break
+                }
             } label: {
                 Image(uiImage: attachment.thumbnail)
                     .resizable()
@@ -53,14 +57,28 @@ struct MediaAttachmentPreviewView: View {
                     }
             }
             .buttonStyle(NoTapAnimationStyle())
-
-//                .onTapGesture {
-//                    switch attachment.type {
-//                    case .photo(let imageAttachment):
-//                        print("Trying to full screen image")
-//                    default: break
-//                    }
-//                }
+        }
+    }
+    
+    private func audioAttachmentPreview(attachment: MediaAttachment) -> some View {
+        ZStack {
+            LinearGradient(colors: [.green, .green.opacity(0.8), .teal], startPoint: .topLeading, endPoint: .bottom)
+            playButton("mic.fill", attachment: attachment)
+                .padding(.bottom, 15)
+        }
+        .frame(width: Constants.imageDimen * 2, height: Constants.imageDimen)
+        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+        .overlay(alignment: .topTrailing) {
+            cancelButton(item: attachment)
+        }
+        .overlay(alignment: .bottomLeading) {
+            Text(attachment.fileURL?.absoluteString ?? "Unknown")
+                .lineLimit(1)
+                .font(.caption)
+                .padding(2)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .foregroundStyle(.white)
+                .background(.white.opacity(0.5))
         }
     }
     
@@ -95,27 +113,6 @@ struct MediaAttachmentPreviewView: View {
                 .shadow(radius: 5)
                 .padding([.top, .trailing], 2)
                 .bold()
-        }
-    }
-    
-    private func audioAttachmentPreview(attachment: MediaAttachment) -> some View {
-        ZStack {
-            LinearGradient(colors: [.green, .green.opacity(0.8), .teal], startPoint: .topLeading, endPoint: .bottom)
-            playButton("mic.fill", attachment: attachment)
-                .padding(.bottom, 15)
-        }
-        .frame(width: Constants.imageDimen * 2, height: Constants.imageDimen)
-        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-        .overlay(alignment: .topTrailing) {
-            cancelButton(item: attachment)
-        }
-        .overlay(alignment: .bottomLeading) {
-            Text("Test mp3 file name here")
-                .font(.caption)
-                .padding(2)
-                .frame(maxWidth: .infinity, alignment: .center)
-                .foregroundStyle(.white)
-                .background(.white.opacity(0.5))
         }
     }
 }

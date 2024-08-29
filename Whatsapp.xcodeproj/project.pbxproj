@@ -36,6 +36,7 @@
 		FA24B1942C7F91D300B0A986 /* MediaPickerItem_Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24B1932C7F91D300B0A986 /* MediaPickerItem_Types.swift */; };
 		FA3A77872C7FBCD600B5239A /* MediaPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A77862C7FBCD600B5239A /* MediaPlayerView.swift */; };
 		FA424A772C7FACD200BC4FBE /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA424A762C7FACD100BC4FBE /* URL+Extensions.swift */; };
+		FA5D286A2C80BEB0005558E1 /* AudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5D28692C80BEB0005558E1 /* AudioRecorderService.swift */; };
 		FA8045ED2C7523DB005EB72B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045EC2C7523DB005EB72B /* Message.swift */; };
 		FA8045EF2C7524F1005EB72B /* BubbleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */; };
 		FA8045F12C753391005EB72B /* BubbleTailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045F02C753390005EB72B /* BubbleTailView.swift */; };
@@ -117,6 +118,7 @@
 		FA24B1932C7F91D300B0A986 /* MediaPickerItem_Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerItem_Types.swift; sourceTree = "<group>"; };
 		FA3A77862C7FBCD600B5239A /* MediaPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerView.swift; sourceTree = "<group>"; };
 		FA424A762C7FACD100BC4FBE /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		FA5D28692C80BEB0005558E1 /* AudioRecorderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderService.swift; sourceTree = "<group>"; };
 		FA8045EC2C7523DB005EB72B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTextView.swift; sourceTree = "<group>"; };
 		FA8045F02C753390005EB72B /* BubbleTailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTailView.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				FA8216B82C7BE276005BE060 /* FirebaseServices */,
+				FA5D28692C80BEB0005558E1 /* AudioRecorderService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				FA121BCB2C78ABA300B2E5DC /* ChatPartnerRowView.swift in Sources */,
 				FA121BB72C77D25A00B2E5DC /* AuthProviderService.swift in Sources */,
 				FA8216B32C7B77C2005BE060 /* MessageFirebaseManager.swift in Sources */,
+				FA5D286A2C80BEB0005558E1 /* AudioRecorderService.swift in Sources */,
 				FABC46902C74085D008DA69B /* SettingsItemView.swift in Sources */,
 				FA8216B72C7BD948005BE060 /* ChatViewModel.swift in Sources */,
 				FA121BCD2C78B2FD00B2E5DC /* ChatPartnerPickerViewModel.swift in Sources */,
@@ -715,13 +719,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Whatsapp/Preview Content\"";
+				DEVELOPMENT_TEAM = 7V9A3KLB32;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "$(PRODUCT_NAME) needs to access microphone to record voice messages,";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -743,13 +750,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Whatsapp/Preview Content\"";
+				DEVELOPMENT_TEAM = 7V9A3KLB32;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "$(PRODUCT_NAME) needs to access microphone to record voice messages,";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

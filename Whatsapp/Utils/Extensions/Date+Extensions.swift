@@ -32,10 +32,22 @@ extension Date {
         dateFormatter.dateFormat = "h:mm a"
         return dateFormatter.string(from: self)
     }
+    
+    func toString(dateFormat: String) -> String {
+         let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.string(from: self)
+    }
 }
 
 extension TimeInterval {
     func toDate() -> Date {
         return Date(timeIntervalSince1970: self)
+    }
+    
+    var formatElapsedTime: String {
+        let minutes = Int(self) / 60
+        let seconds = Int(self) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }

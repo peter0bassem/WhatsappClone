@@ -87,7 +87,6 @@ struct Channel: Identifiable, Codable, Hashable {
             }
             return "Unknown."
         }
-        
     }
     
     enum CodingKeys: String, CodingKey {

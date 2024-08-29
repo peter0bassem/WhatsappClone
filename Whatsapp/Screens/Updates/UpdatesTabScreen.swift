@@ -75,7 +75,8 @@ private struct StatusSectionHeaderView: View {
                 Text(" ")
                 +
                 Text("Status Privavacy")
-                    .foregroundStyle(.blue)
+//                    .foregroundStyle(.blue)
+                    .foregroundColor(.blue)
                     .bold()
             )
             

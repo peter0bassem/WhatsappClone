@@ -13,6 +13,8 @@ import SwiftUI
 @MainActor
 final class ChatViewModel: ObservableObject {
     @Published var messageText: String = ""
+    @Published var isRecordingVoiceMessage: Bool = false
+    @Published var elapsedVoiceMessageTime: TimeInterval = 0
     @Published var currentUser: User?
     @Published var messages: [Message] = []
     @Published var showPhotoPicker: Bool = false
@@ -27,19 +29,20 @@ final class ChatViewModel: ObservableObject {
     }
     
     private var cancellables = Set<AnyCancellable>()
+    private let audioRecorderService = AudioRecorderService()
     private var previousPhotoPickerItems: [PhotosPickerItem] = []
     
     init(channel: Channel) {
         self.channel = channel
         Task {
-            print("channel \(await self.channel.title) members: \(self.channel.members?.compactMap { $0.username })")
+            print("channel \(await self.channel.title) members: \(self.channel.members?.compactMap { $0.username } ?? [])")
             guard let currentUserUid = await AuthProviderServiceImp.shared.getCurrentUserId(),
                   let members = channel.members,
                   let currentUserIndexSet = members.firstIndex(where: { $0.uid == currentUserUid })
             else { return }
             
             self.channel.members?.move(fromIndex: currentUserIndexSet, toIndex: 0)
-            print("channel \(await self.channel.title) sorted members: \(self.channel.members?.compactMap { $0.username })")
+            print("channel \(await self.channel.title) sorted members: \(self.channel.members?.compactMap { $0.username } ?? [])")
             print("================================================================")
             
         }
@@ -56,7 +59,9 @@ final class ChatViewModel: ObservableObject {
                 guard let self = self else { return }
                 if photoItems.count > self.previousPhotoPickerItems.count {
                     Task {
-                        self.selectedAttachments = []
+//                        self.selectedAttachments = []
+                        let audioRecordings = self.selectedAttachments.filter({ $0.type == .audio(audioURL: .init(string: "https://www.google.com")!, duration: 0) })
+                        self.selectedAttachments = audioRecordings
                         for photoPickerItem in self.photoPickerItems {
                             if photoPickerItem.isVideo {
                                 do {
@@ -93,6 +98,7 @@ final class ChatViewModel: ObservableObject {
         DispatchQueue.main.async { [weak self] in
             self?.currentUser = nil
         }
+        audioRecorderService.tearDown()
     }
     
     private func observerListeners() {
@@ -109,16 +115,56 @@ final class ChatViewModel: ObservableObject {
                 case .removeItem(let item):
                     withAnimation {
                         guard let self = self,
-                              let itemIndex = self.selectedAttachments.firstIndex(where: { $0.id == item.id }),
-                              let photoItemIndex = self.photoPickerItems.firstIndex(where: { $0.itemIdentifier == item.id })
+                              let itemIndex = self.selectedAttachments.firstIndex(where: { $0.id == item.id })
                         else { return }
+                        let attachment = self.selectedAttachments[itemIndex]
                         self.selectedAttachments.remove(at: itemIndex)
-                        self.photoPickerItems.remove(at: photoItemIndex)
+                        
+                        switch attachment.type {
+                        case .photo, .video:
+                            guard let photoItemIndex = self.photoPickerItems.firstIndex(where: { $0.itemIdentifier == item.id }) else { return }
+                            self.photoPickerItems.remove(at: photoItemIndex)
+                        case .audio(let fileURL, _):
+                            self.audioRecorderService.deleteRecording(at: fileURL)
+                        }
+                        
+                        
                     }
-                    
+                case .recordAudio:
+                    if self?.audioRecorderService.isRecording == true {
+                        // stop recording
+                        Task {
+                            guard let stopRecordingData = await self?.audioRecorderService.stopRecording() else { return }
+                            self?.createAudioAttachment(from: stopRecordingData.audioURL, audioDuration: stopRecordingData.audioDuration)
+                        }
+                    } else {
+                        // start recording
+                        self?.audioRecorderService.startRecording()
+                    }
                 }
             }
             .store(in: &cancellables)
+        
+        audioRecorderService.$isRecording
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isRecording in
+                self?.isRecordingVoiceMessage = isRecording
+            }
+            .store(in: &cancellables)
+        
+        audioRecorderService.$elapsedTime
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] elapsedTime in
+                self?.elapsedVoiceMessageTime = elapsedTime
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func createAudioAttachment(from audioURL: URL?, audioDuration: TimeInterval) {
+        guard let audioURL = audioURL else { return }
+        let id = UUID().uuidString
+        let audioAttachment = MediaAttachment(id: id, type: .audio(audioURL: audioURL, duration: audioDuration))
+        selectedAttachments.insert(audioAttachment, at: 0)
     }
     
     private func listenToAuthState() async {

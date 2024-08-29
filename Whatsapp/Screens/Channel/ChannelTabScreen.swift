@@ -134,7 +134,8 @@ struct ChannelTabScreen: View {
                 Text(" ")
                 +
                 Text("end-to-end encrypted")
-                    .foregroundStyle(.blue)
+//                    .foregroundStyle(.blue)
+                    .foregroundColor(.blue)
             )
         }
         .foregroundStyle(.gray)
