@@ -73,8 +73,8 @@ struct BubbleTextView: View {
             BubbleTextView(item: .sentPlaceholder)
             BubbleTextView(item: .receivedPlaceholder)
             BubbleTextView(item: .sentPlaceholder)
-            BubbleTextView(item: .init(id: "", isGroupChat: true, text: "Hello there!", type: .text, ownerId: "RfZDo1E35IVnZUH4C14pEgr7wxH2", timestamp: nil))
-            BubbleTextView(item: .init(id: "", isGroupChat: true, text: "Hi!", type: .text, ownerId: "", timestamp: nil))
+            BubbleTextView(item: .init(id: "", isGroupChat: true, text: "Hello there!", type: .text, ownerId: "RfZDo1E35IVnZUH4C14pEgr7wxH2", timestamp: nil, thumbnailUrl: nil, thumbnailWidth: nil, thumbnailHeight: nil, videoUrl: nil, audioURL: nil, audioDuration: nil))
+            BubbleTextView(item: .init(id: "", isGroupChat: true, text: "Hi!", type: .text, ownerId: "", timestamp: nil, thumbnailUrl: nil, thumbnailWidth: nil, thumbnailHeight: nil, videoUrl: nil, audioURL: nil, audioDuration: nil))
         }
         .padding(.horizontal, 10)
     }

@@ -15,8 +15,11 @@ struct TextInputAreaView: View {
     @Binding var elapsedTime: TimeInterval
     var actionObserver: PassthroughSubject<UserAction, Never>
     
-    private var disableSendButton: Bool {
-        messageText.isEmptyOrWhiteSpace || isRecording
+    @EnvironmentObject private var chatViewModel: ChatViewModel
+    
+    private var isSendButtonDisabled: Bool {
+        chatViewModel.disableSendButton || isRecording
+        
     }
     
     var body: some View {
@@ -126,8 +129,8 @@ struct TextInputAreaView: View {
                 .clipShape(Circle())
                 .padding(.horizontal, 3)
         }
-        .disabled(disableSendButton)
-        .grayscale(disableSendButton ? 0.8 : 0.0)
+        .disabled(isSendButtonDisabled)
+        .grayscale(isSendButtonDisabled ? 0.8 : 0.0)
     }
 }
 
@@ -141,4 +144,5 @@ struct TextInputAreaView: View {
 
 #Preview {
     TextInputAreaView(messageText: .constant(""), isRecording: .constant(false), elapsedTime: .constant(0), actionObserver: .init())
+        .environmentObject(ChatViewModel(channel: .placeholderChannel))
 }

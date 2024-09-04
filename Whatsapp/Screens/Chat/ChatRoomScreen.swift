@@ -7,6 +7,40 @@
 
 import SwiftUI
 import PhotosUI
+import Combine
+
+final class KeyboardObserver: ObservableObject {
+    @Published var isKeyboardVisible: Bool = false
+    @Published var keyboardHeight: CGFloat = 0
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        let willShow = NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+        let willHide = NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+        
+        willShow
+            .merge(with: willHide)
+            .sink { [weak self] notification in
+                guard let self = self else { return }
+                self.handleKeyboard(notification: notification)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func handleKeyboard(notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        let isShowing = notification.name == UIResponder.keyboardWillShowNotification
+        
+        isKeyboardVisible = isShowing
+        
+        if isShowing, let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            keyboardHeight = keyboardFrame.height
+        } else {
+            keyboardHeight = 0
+        }
+    }
+}
 
 struct ChatRoomScreen: View {
     let channel: Channel
@@ -15,77 +49,100 @@ struct ChatRoomScreen: View {
     @State private var hideToolbar: Bool = false
     @State private var circleProfileImageView = CircleProfileImageView(profileImageUrl: nil, size: .medium)
     
+    @StateObject private var keyboardObserver = KeyboardObserver()
+    
     init(channel: Channel) {
         self.channel = channel
         self._chatViewModel = StateObject(wrappedValue: ChatViewModel(channel: channel))
     }
 
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                ForEach(chatViewModel.messages) { messageItem in
-                    switch messageItem.type {
-                    case .text/*(_)*/:
-                        BubbleTextView(item: messageItem)
-                    case .photo, .video:
-                        BubbleImageView(item: messageItem)
-                    case .audio:
-                        BubbleAudioView(item: messageItem)
-                    case .admin(let adminType):
-                        switch adminType {
-                        case .channelCreation:
-                            ChannelCreationTextView()
-                                .padding(.bottom, 5)
-                            if channel.isGroupChat {
-                                AdminMessageTextView(channel: channel)
+        ScrollViewReader { proxy in
+            ScrollView {
+                LazyVStack {
+                    ForEach(chatViewModel.messages) { messageItem in
+                        switch messageItem.type {
+                        case .text:
+                            BubbleTextView(item: messageItem)
+                                .id(messageItem)
+                        case .photo, .video:
+                            BubbleImageView(item: messageItem, chatActionObserver: chatViewModel.chatActionObserver)
+                                .id(messageItem)
+                        case .audio:
+                            BubbleAudioView(item: messageItem, chatActionObserver: chatViewModel.chatActionObserver)
+                                .id(messageItem)
+                        case .admin(let adminType):
+                            switch adminType {
+                            case .channelCreation:
+                                ChannelCreationTextView()
                                     .padding(.bottom, 5)
+                                    .id(messageItem)
+                                if channel.isGroupChat {
+                                    AdminMessageTextView(channel: channel)
+                                        .padding(.bottom, 5)
+                                        .id(messageItem)
+                                }
+                            default:
+                                Text("UNKNOWN")
                             }
-                        default:
-                            Text("UNKNOWN")
+                        default: EmptyView()
                         }
-                    default: EmptyView()
                     }
                 }
+                .padding(.horizontal, 10)
             }
-            .padding(.horizontal, 10)
-        }
-        .padding(.top, 10)
-        .safeAreaInset(edge: .top, content: {
-            Color.clear
-                .frame(height: 0)
-                .background(.bar)
-                .border(.black)
-        })
-        .navigationBarTitleDisplayMode(.inline)
-        .background(
-            Image(.chatbackground)
-                .resizable()
-                .scaledToFill()
-        )
-        .toolbar {
-            leadingNavItems()
-            trailingNavItems()
-        }
-        .scrollIndicators(.hidden)
-        .photosPicker(isPresented: $chatViewModel.showPhotoPicker, selection: $chatViewModel.photoPickerItems, maxSelectionCount: 6, photoLibrary: .shared()) //photoLibrary is added for item deletion from picker.
-        .safeAreaInset(edge: .bottom) {
-            bottomSafeAreaView()
-                .background(.whatsAppWhite)
-        }
-        .toolbar(hideToolbar ? .hidden : .visible, for: .tabBar)
-        .task {
-            circleProfileImageView = await CircleProfileImageView(channel: channel, size: .mini)
-        }
-        .onAppear {
-            hideToolbar = true
-        }
-        .onDisappear {
-            hideToolbar = false
-        }
-        .fullScreenCover(isPresented: $chatViewModel.videoPlayerState.show) {
-            if let player = chatViewModel.videoPlayerState.player {
-                MediaPlayerView(player: player ) {
-                    chatViewModel.dismissMediaPlayer()
+            .padding(.top, 10)
+            .safeAreaInset(edge: .top, content: {
+                Color.clear
+                    .frame(height: 0)
+                    .background(.bar)
+                    .border(.black)
+            })
+            .navigationBarTitleDisplayMode(.inline)
+            .background(
+                Image(.chatbackground)
+                    .resizable()
+                    .scaledToFill()
+            )
+            .toolbar {
+                leadingNavItems()
+                trailingNavItems()
+            }
+            .scrollIndicators(.hidden)
+            .photosPicker(isPresented: $chatViewModel.showPhotoPicker, selection: $chatViewModel.photoPickerItems, maxSelectionCount: 6, photoLibrary: .shared()) //photoLibrary is added for item deletion from picker.
+            .safeAreaInset(edge: .bottom) {
+                bottomSafeAreaView()
+                    .background(.whatsAppWhite)
+            }
+            .toolbar(hideToolbar ? .hidden : .visible, for: .tabBar)
+            .task {
+                circleProfileImageView = await CircleProfileImageView(channel: channel, size: .mini)
+            }
+            .onAppear {
+                hideToolbar = true
+            }
+            .onDisappear {
+                hideToolbar = false
+            }
+            .onChange(of: chatViewModel.messages) { _ in
+                print("chatViewModel.messages: \(chatViewModel.messages.count)")
+                scrollToLastMessage(proxy: proxy)
+            }
+            .onChange(of: keyboardObserver.isKeyboardVisible) { _ in
+                print("chatViewModel.messages: \(chatViewModel.messages.count)")
+                scrollToLastMessage(proxy: proxy)
+            }
+            .simultaneousGesture(
+                DragGesture()
+                    .onChanged{ _ in
+                        UIApplication.dismissKeyboard()
+                    }
+            )
+            .fullScreenCover(isPresented: $chatViewModel.videoPlayerState.show) {
+                if let player = chatViewModel.videoPlayerState.player {
+                    MediaPlayerView(player: player ) {
+                        chatViewModel.dismissMediaPlayer()
+                    }
                 }
             }
         }
@@ -99,9 +156,21 @@ struct ChatRoomScreen: View {
                 Divider()
             }
             TextInputAreaView(messageText: $chatViewModel.messageText, isRecording: $chatViewModel.isRecordingVoiceMessage, elapsedTime: $chatViewModel.elapsedVoiceMessageTime, actionObserver: chatViewModel.actionObserver)
+                .environmentObject(chatViewModel)
         }
         .animation(.easeInOut, value: chatViewModel.showPhotoPickerPreview)
     }
+    
+    private func scrollToLastMessage(proxy: ScrollViewProxy) {
+        DispatchQueue.main.async {
+            if let lastMessage = chatViewModel.messages.last {
+                withAnimation {
+                    proxy.scrollTo(lastMessage, anchor: .bottom)
+                }
+            }
+        }
+    }
+
 }
 
 private extension ChatRoomScreen {

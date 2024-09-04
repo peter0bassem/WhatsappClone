@@ -7,103 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B855400F-7635-493F-AA3F-DA2EB9D29198"
-            shouldBeEnabled = "Yes"
+            uuid = "F86F7C2B-36C4-4B04-836F-93421EC17F7F"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Whatsapp/Managers/Firebase/MessageFirebaseManager.swift"
+            filePath = "Whatsapp/Screens/Chat/ChatViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
-            landmarkName = "fetchUserChannels(withUserId:)"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
+            landmarkName = "sendMediaAttachmentsToDatabase(channel:text:for:attachment:imageURL:videoURL:audioURL:audioDuration:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B855400F-7635-493F-AA3F-DA2EB9D29198 - 54debf4fe2d895e8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (__C.FIRDataSnapshot) -&gt; () in static Whatsapp.MessageFirebaseManager.fetchUserChannels(withUserId: Swift.String) -&gt; Combine.AnyPublisher&lt;Swift.Array&lt;Whatsapp.Channel&gt;, Swift.Error&gt;"
-                  moduleName = "Whatsapp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/icommunityapp/iOS%20Development/Study/WhatsappClone/Whatsapp/Whatsapp/Managers/Firebase/MessageFirebaseManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "195"
-                  endingLineNumber = "195">
-               </Location>
-               <Location
-                  uuid = "B855400F-7635-493F-AA3F-DA2EB9D29198 - 2f6050c05d49ae86"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (__C.FIRDataSnapshot) -&gt; () in static Whatsapp.MessageFirebaseManager.fetchUserChannels(withUserId: Swift.String) -&gt; Combine.AnyPublisher&lt;Swift.Array&lt;Whatsapp.Channel&gt;, Swift.Error&gt;"
-                  moduleName = "Whatsapp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/icommunityapp/iOS%20Development/Study/WhatsappClone/Whatsapp/Whatsapp/Managers/Firebase/MessageFirebaseManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "195"
-                  endingLineNumber = "195">
-               </Location>
-               <Location
-                  uuid = "B855400F-7635-493F-AA3F-DA2EB9D29198 - d7851845a305acd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (__C.FIRDataSnapshot) -&gt; () in static Whatsapp.MessageFirebaseManager.fetchUserChannels(withUserId: Swift.String) -&gt; Combine.AnyPublisher&lt;Swift.Array&lt;Whatsapp.Channel&gt;, Swift.Error&gt;"
-                  moduleName = "Whatsapp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/icommunityapp/iOS%20Development/Study/WhatsappClone/Whatsapp/Whatsapp/Managers/Firebase/MessageFirebaseManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "186"
-                  endingLineNumber = "186">
-               </Location>
-               <Location
-                  uuid = "B855400F-7635-493F-AA3F-DA2EB9D29198 - d7851845a3059e6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (__C.FIRDataSnapshot) -&gt; () in static Whatsapp.MessageFirebaseManager.fetchUserChannels(withUserId: Swift.String) -&gt; Combine.AnyPublisher&lt;Swift.Array&lt;Whatsapp.Channel&gt;, Swift.Error&gt;"
-                  moduleName = "Whatsapp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/icommunityapp/iOS%20Development/Study/WhatsappClone/Whatsapp/Whatsapp/Managers/Firebase/MessageFirebaseManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "195"
-                  endingLineNumber = "195">
-               </Location>
-               <Location
-                  uuid = "B855400F-7635-493F-AA3F-DA2EB9D29198 - 5aa6bd19f61c78cc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (__C.FIRDataSnapshot) -&gt; () in static Whatsapp.MessageFirebaseManager.fetchUserChannels(withUserId: Swift.String) -&gt; Combine.AnyPublisher&lt;Swift.Array&lt;Whatsapp.Channel&gt;, Swift.Error&gt;"
-                  moduleName = "Whatsapp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/icommunityapp/iOS%20Development/Study/WhatsappClone/Whatsapp/Whatsapp/Managers/Firebase/MessageFirebaseManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "186"
-                  endingLineNumber = "186">
-               </Location>
-               <Location
-                  uuid = "B855400F-7635-493F-AA3F-DA2EB9D29198 - 5aa6bd19f61c7be7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 (__C.FIRDataSnapshot) -&gt; () in static Whatsapp.MessageFirebaseManager.fetchUserChannels(withUserId: Swift.String) -&gt; Combine.AnyPublisher&lt;Swift.Array&lt;Whatsapp.Channel&gt;, Swift.Error&gt;"
-                  moduleName = "Whatsapp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/icommunityapp/iOS%20Development/Study/WhatsappClone/Whatsapp/Whatsapp/Managers/Firebase/MessageFirebaseManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "195"
-                  endingLineNumber = "195">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

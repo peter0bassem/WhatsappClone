@@ -19,6 +19,7 @@ protocol AuthProviderService: Actor {
     func createAccount(for username: String, email: String, password: String) async throws
     func autoLogin() async
     func getCurrentUserId() -> String?
+    func fetchCurrentUserInfo() async -> User?
     func logout() async throws
 }
 
@@ -115,6 +116,10 @@ final actor AuthProviderServiceImp: AuthProviderService {
     
     func getCurrentUserId() -> String? {
         AuthFirebaseManager.getCurrentUserId()
+    }
+    
+    func fetchCurrentUserInfo() async -> User? {
+        await AuthFirebaseManager.fetchCurrentUserInfo()
     }
     
     func logout() async throws {

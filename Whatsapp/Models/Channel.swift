@@ -10,19 +10,22 @@ import Foundation
 struct Channel: Identifiable, Codable, Hashable {
     var id: String?
     var name: String?
-    var lastMessage: String
+    var lastMessage: String?
     var creationData: TimeInterval?
-    var lastMessageTimestamp: TimeInterval
+    var lastMessageTimestamp: TimeInterval?
     var membersCount: UInt?
     var adminUids: [String]?
     var memberUids: [String]?
     var members: [User]?
-    private var thumbinalUrl: String?
+    var thumbnailUrl: String?
     var createdBy: String?
+    var lastMessageType: String?
+    var thumbnailWidth: CGFloat?
+    var thumbnailHeight: CGFloat?
     
     var coverImageUrl: String? {
         get async {
-            if let thumbinalUrl = thumbinalUrl {
+            if let thumbinalUrl = thumbnailUrl {
                 return thumbinalUrl
             }
             if !isGroupChat {
@@ -98,11 +101,13 @@ struct Channel: Identifiable, Codable, Hashable {
         case membersCount
         case adminUids
         case memberUids
-        case thumbinalUrl
+        case thumbnailUrl
         case createdBy
+        case thumbnailWidth
+        case thumbnailHeight
     }
     
-    init(id: String? = nil, name: String? = nil, lastMessage: String, creationData: TimeInterval? = nil, lastMessageTimestamp: TimeInterval, membersCount: UInt? = nil, adminUids: [String]? = nil, memberUids: [String]? = nil, members: [User]? = nil, thumbinalUrl: String? = nil, createdBy: String? = nil) {
+    init(id: String? = nil, name: String? = nil, lastMessage: String? = nil, creationData: TimeInterval? = nil, lastMessageTimestamp: TimeInterval? = nil, membersCount: UInt? = nil, adminUids: [String]? = nil, memberUids: [String]? = nil, members: [User]? = nil, thumbinalUrl: String? = nil, createdBy: String? = nil, lastMessageType: String? = nil) {
         self.id = id
         self.name = name
         self.lastMessage = lastMessage
@@ -112,8 +117,9 @@ struct Channel: Identifiable, Codable, Hashable {
         self.adminUids = adminUids
         self.memberUids = memberUids
         self.members = members
-        self.thumbinalUrl = thumbinalUrl
+        self.thumbnailUrl = thumbinalUrl
         self.createdBy = createdBy
+        self.lastMessageType = lastMessageType
     }
     
     static let placeholderChannel: Channel = .init(id: "1", lastMessage: "Hello World", creationData: .init(), lastMessageTimestamp: .init(), membersCount: 2, adminUids: [], memberUids: [], members: [], thumbinalUrl: nil, createdBy: "")

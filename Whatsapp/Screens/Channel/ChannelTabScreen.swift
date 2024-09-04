@@ -45,11 +45,6 @@ struct ChannelTabScreen: View {
             .sheet(isPresented: $channelViewModel.showChartPartnerPickerView) {
                 ChatPartnerPickerScreen(onCreate: channelViewModel.onNewChannelCreation)
             }
-            .navigationDestination(isPresented: $channelViewModel.navigateToChatRoom) {
-                if let newChannel = channelViewModel.newChannel {
-                    ChatRoomScreen(channel: newChannel)
-                }
-            }
             .task {
                 await channelViewModel.fetchCurrentUserChannels()
             }

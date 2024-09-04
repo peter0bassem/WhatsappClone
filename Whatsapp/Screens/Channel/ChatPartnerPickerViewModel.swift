@@ -255,4 +255,10 @@ struct MessageRequest: Codable {
     let type: String
     let timestamp: TimeInterval
     let ownerId: String
+    var thumbnailUrl: String? = nil
+    var thumbnailWidth: CGFloat? = nil
+    var thumbnailHeight: CGFloat? = nil
+    var videoUrl: String? = nil
+    var audioURL: String? = nil
+    var audioDuration: TimeInterval? = nil
 }

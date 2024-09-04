@@ -8,14 +8,16 @@
 import Foundation
 import FirebaseCore
 import FirebaseDatabase
+import FirebaseStorage
 
 enum FirebaseReferenceConstants {
-    private static let databaseReference = Database.database().reference()
-    static let UsersRef = databaseReference.child("users")
-    static let ChannelsRef = databaseReference.child("channels")
-    static let MessagesRef = databaseReference.child("channel-messages")
-    static let UserChannelsRef = databaseReference.child("user-channels")
-    static let UserDirectChannelsRef = databaseReference.child("user-direct-channels")
+    static let StorageReference = Storage.storage().reference()
+    private static let DatabaseReference = Database.database().reference()
+    static let UsersRef = DatabaseReference.child("users")
+    static let ChannelsRef = DatabaseReference.child("channels")
+    static let MessagesRef = DatabaseReference.child("channel-messages")
+    static let UserChannelsRef = DatabaseReference.child("user-channels")
+    static let UserDirectChannelsRef = DatabaseReference.child("user-direct-channels")
 }
 
 class FirebaseManager {

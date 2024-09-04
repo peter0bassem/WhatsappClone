@@ -14,6 +14,7 @@ protocol MessageService: Actor {
     func fetchUserChannels(withUserId userId: String) -> AnyPublisher<[Channel], Error>
     func sendTextMessage(toChannel channel: Channel, fromUser user: User, textMessage: String) async throws
     func getMessages(forChannel channel: Channel) -> AnyPublisher<[Message], Error>
+    func sendMediaMessage(to channel: Channel, params: MessageUploadRequest) async throws
 }
 
 /// Handle Sending, Receiving messages and setting Reactions
@@ -37,5 +38,9 @@ final actor MessageServiceImpl: MessageService {
     
     func getMessages(forChannel channel: Channel) -> AnyPublisher<[Message], Error> {
         return MessageFirebaseManager.getMessages(forChannel: channel)
+    }
+    
+    func sendMediaMessage(to channel: Channel, params: MessageUploadRequest) async throws {
+        try await MessageFirebaseManager.sendMediaMessage(to: channel, params: params)
     }
 }

@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-import SwiftUIIntrospect
+import Combine
 
 struct BubbleAudioView: View {
     let item: Message
+    var chatActionObserver: PassthroughSubject<MessageType, Never>
     @State private var itemDirection: MessageDirection = .unset
     @State private var itemHorizontalAlignmnet: HorizontalAlignment = .center
     @State private var itemBackground: Color = .clear
@@ -72,7 +73,7 @@ struct BubbleAudioView: View {
     
     private func playButton() -> some View {
         Button {
-            
+            chatActionObserver.send(.audio(audioURL: URL(string: item.audioURL.removeOptional)))
         } label: {
             Image(systemName: "play.fill")
 //                .padding()
@@ -88,7 +89,7 @@ struct BubbleAudioView: View {
     
     private func timestampView() -> some View {
         HStack(spacing: 2 ) {
-            Text("3:05 PM")
+            Text((item.timestamp ?? 0.0).toDate().formatToTime)
                 .font(.footnote/*.system(size: 13)*/)
                 .foregroundStyle(.gray)
                 .frame(maxWidth: .infinity, alignment: .bottomTrailing)
@@ -108,9 +109,9 @@ struct BubbleAudioView: View {
 #Preview {
     ScrollView {
         VStack {
-            BubbleAudioView(item: .sentPlaceholder)
-            BubbleAudioView(item: .receivedPlaceholder)
-            BubbleAudioView(item: .init(id: "", isGroupChat: true, text: nil, type: .audio, ownerId: "", timestamp: nil))
+            BubbleAudioView(item: .sentPlaceholder, chatActionObserver: .init())
+            BubbleAudioView(item: .receivedPlaceholder, chatActionObserver: .init())
+            BubbleAudioView(item: .init(id: "", isGroupChat: true, text: nil, type: .audio(audioURL: nil), ownerId: "", timestamp: nil, thumbnailUrl: nil, thumbnailWidth: nil, thumbnailHeight: nil, videoUrl: nil, audioURL: nil, audioDuration: nil), chatActionObserver: .init())
         }
         .padding(.horizontal, 10)
     }

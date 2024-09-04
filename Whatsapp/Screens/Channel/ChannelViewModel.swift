@@ -41,7 +41,7 @@ final class ChannelViewModel: ObservableObject {
                     print("Failed to observe channels: \(error)")
                 }
             }, receiveValue: { [weak self] channels in
-                self?.channels = channels.sorted(by: { $0.lastMessageTimestamp > $1.lastMessageTimestamp })
+                self?.channels = channels.sorted(by: { ($0.lastMessageTimestamp ?? 0.0) > ($1.lastMessageTimestamp ?? 0.0) })
             })
             .store(in: &cancellables)
         

@@ -96,13 +96,40 @@ actor MessageFirebaseManager {
         let timestamp = Date().timeIntervalSince1970
         guard let messageId = FirebaseReferenceConstants.MessagesRef.childByAutoId().key else { return }
         
-        let updatedChannelDictionary = try Channel(lastMessage: textMessage, lastMessageTimestamp: timestamp).asDictionary()
+        let updatedChannel = Channel(lastMessage: textMessage, lastMessageTimestamp: timestamp)
+        guard let updatedChannelDictionary = try FirebaseEncoder().encode(updatedChannel) as? [String: Any] else { return }
         
         let message = MessageRequest(text: textMessage, type: MessageType.text.title, timestamp: timestamp, ownerId: user.uid)
         let encodedMessage = try FirebaseEncoder().encode(message)
         
         try await FirebaseReferenceConstants.ChannelsRef.child(channel.id.removeOptional).updateChildValues(updatedChannelDictionary)
         try await FirebaseReferenceConstants.MessagesRef.child(channel.id.removeOptional).child(messageId).setValue(encodedMessage)
+    }
+    
+    static func sendMediaMessage(to channel: Channel, params: MessageUploadRequest) async throws {
+        let timestamp = Date().timeIntervalSince1970
+        guard let messageId = FirebaseReferenceConstants.MessagesRef.childByAutoId().key else { return }
+        
+        let updatedChannel = Channel(lastMessage: params.text, lastMessageTimestamp: timestamp, lastMessageType: params.type.title)
+        
+        guard let updatedChannelDictionary = try FirebaseEncoder().encode(updatedChannel) as? [String: Any] else { return }
+        
+        var message = MessageRequest(text: params.text, type: params.type.title, timestamp: timestamp, ownerId: params.ownerId)
+        
+        /// Photo and Video messages
+        message.thumbnailUrl = params.thmbnailURL ?? nil
+        message.thumbnailWidth = params.thumbnailWidth ?? nil
+        message.thumbnailHeight = params.thumbnailHeight ?? nil
+        message.videoUrl = params.videoURL ?? nil
+        
+        /// Voice Messaages
+        message.audioURL = params.audioURL ?? nil
+        message.audioDuration = params.audioDuration ?? nil
+        
+        guard let encodedMessageDict = try FirebaseEncoder().encode(message) as? [String: Any] else { return }
+        
+        try await FirebaseReferenceConstants.ChannelsRef.child(channel.id.removeOptional).updateChildValues(updatedChannelDictionary)
+        try await FirebaseReferenceConstants.MessagesRef.child(channel.id.removeOptional).child(messageId).setValue(encodedMessageDict)
     }
     
     static func getMessages(forChannel channel: Channel) -> AnyPublisher<[Message], Error> {
@@ -117,7 +144,7 @@ actor MessageFirebaseManager {
                 // Mapping and decoding the messages
                 let messages = try value.map { (messageId: $0.key, message: $0.value) }
                                         .map { (messageId: $0.messageId, message: try FirebaseDecoder().decode(Message.self, from: $0.message)) }
-                                        .map { Message(id: $0.messageId, isGroupChat: channel.isGroupChat, text: $0.message.text, type: $0.message.type, ownerId: $0.message.ownerId, timestamp: $0.message.timestamp) }
+                                        .map { Message.init(id: $0.messageId, isGroupChat: channel.isGroupChat, text: $0.message.text, type: $0.message.type, ownerId: $0.message.ownerId, timestamp: $0.message.timestamp, thumbnailUrl: $0.message.thumbnailUrl, thumbnailWidth: $0.message.thumbnailWidth, thumbnailHeight: $0.message.thumbnailHeight, videoUrl: $0.message.videoUrl, audioURL: $0.message.audioURL, audioDuration: $0.message.audioDuration) }
                 
                 // Send the new messages to the subscriber
                 subject.send(messages)
@@ -247,39 +274,12 @@ struct ChannelRequest: Codable {
     
 }
 
-extension Encodable {
-    func dictionary() -> [String:Any] {
-        var dict = [String:Any]()
-        let mirror = Mirror(reflecting: self)
-        for child in mirror.children {
-            guard let key = child.label else { continue }
-            let childMirror = Mirror(reflecting: child.value)
-            
-            switch childMirror.displayStyle {
-            case .struct, .class:
-                let childDict = (child.value as! Encodable).dictionary()
-                dict[key] = childDict
-            case .collection:
-                let childArray = (child.value as! [Encodable]).map({ $0.dictionary() })
-                dict[key] = childArray
-            case .set:
-                let childArray = (child.value as! Set<AnyHashable>).map({ ($0 as! Encodable).dictionary() })
-                dict[key] = childArray
-            default:
-                dict[key] = child.value
-            }
-        }
-        
-        return dict
-    }
-}
-
-extension Encodable {
-  func asDictionary() throws -> [String: Any] {
-    let data = try JSONEncoder().encode(self)
-    guard let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
-      throw NSError()
-    }
-    return dictionary
-  }
-}
+//extension Encodable {
+//  func asDictionary() throws -> [String: Any] {
+//    let data = try JSONEncoder().encode(self)
+//    guard let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
+//      throw NSError()
+//    }
+//    return dictionary
+//  }
+//}

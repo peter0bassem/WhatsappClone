@@ -22,10 +22,15 @@ final class ChatViewModel: ObservableObject {
     @Published var selectedAttachments: [MediaAttachment] = []
     @Published var videoPlayerState: (show: Bool, player: AVPlayer?) = (false, nil)
     var actionObserver = PassthroughSubject<UserAction, Never>()
+    var chatActionObserver = PassthroughSubject<MessageType, Never>()
     private var channel: Channel
     
     var showPhotoPickerPreview: Bool {
         !photoPickerItems.isEmpty || !selectedAttachments.isEmpty
+    }
+    
+    var disableSendButton: Bool {
+        selectedAttachments.isEmpty && messageText.isEmptyOrWhiteSpace
     }
     
     private var cancellables = Set<AnyCancellable>()
@@ -158,6 +163,22 @@ final class ChatViewModel: ObservableObject {
                 self?.elapsedVoiceMessageTime = elapsedTime
             }
             .store(in: &cancellables)
+        
+        chatActionObserver
+            .sink { [weak self] action in
+                switch action {
+                case .video(let videoURL):
+                    UIApplication.dismissKeyboard()
+                    guard let videoURL = videoURL else { return }
+                    self?.showMediaPlayer(for: videoURL)
+                case .audio(let audioURL):
+                    UIApplication.dismissKeyboard()
+                    guard let audioURL = audioURL else { return }
+                    self?.showMediaPlayer(for: audioURL)
+                default: break
+                }
+            }
+            .store(in: &cancellables)
     }
     
     private func createAudioAttachment(from audioURL: URL?, audioDuration: TimeInterval) {
@@ -181,18 +202,109 @@ final class ChatViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    /// send text message
+    /// send  message
     func sendMessage() {
         guard let currentUser = currentUser else { return }
-        Task {
-            do {
-                try await MessageServiceImpl.shared.sendTextMessage(toChannel: channel, fromUser: currentUser, textMessage: messageText)
-                self.messageText = ""
-                print("MessageServiceImpl is sending...")
-            } catch {
-                print("Failed to send message \(messageText): \(error.localizedDescription)")
+        if selectedAttachments.isEmpty {
+            // send text message
+            Task {
+                do {
+                    try await MessageServiceImpl.shared.sendTextMessage(toChannel: channel, fromUser: currentUser, textMessage: messageText)
+                    self.messageText = ""
+                    print("MessageServiceImpl is sending...")
+                } catch {
+                    print("Failed to send message \(messageText): \(error.localizedDescription)")
+                }
+            }
+        } else {
+            // send message with attachments (images, videos, voice recors)
+            sendMultipleMediaMessages(text: messageText, attachments: selectedAttachments)
+        }
+    }
+    
+    private func sendMultipleMediaMessages(text: String, attachments: [MediaAttachment]) {
+        selectedAttachments.forEach {
+            switch $0.type {
+            case .photo:
+                sendPhotoMessage(text: text, attachment: $0)
+            case .video:
+                sendVideoMessage(text: text, attachment: $0)
+            case .audio:
+                sendVoiceMessage(text: text, attachment: $0)
             }
         }
+    }
+    
+    private func sendPhotoMessage(text: String, attachment: MediaAttachment) {
+        /// Upload Message to Storage
+        /// Store the metadata to our database
+        Task {
+            do {
+                let (imageURL, progress) = try await uploadImageToFirebase(attachment: attachment)
+                sendMediaAttachmentsToDatabase(channel: channel, text: text, for: .photo, attachment: attachment, imageURL: imageURL)
+                clearTextInputArea()
+            } catch {
+                print("Failed to upload photo message: \(error)")
+            }
+        }
+    }
+    
+    private func sendMediaAttachmentsToDatabase(channel: Channel, text: String, for messageType: MessageType, attachment: MediaAttachment, imageURL: URL? = nil, videoURL: URL? = nil, audioURL: URL? = nil, audioDuration: TimeInterval? = nil) {
+        Task {
+            guard let currentUser = await AuthProviderServiceImp.shared.fetchCurrentUserInfo() else { return }
+            do {
+                let params: MessageUploadRequest = .init(channel: channel, text: text, type: messageType, attachment: attachment, thmbnailURL: imageURL?.absoluteString, videoURL: videoURL?.absoluteString, sender: currentUser, audioURL: audioURL?.absoluteString, audioDuration: audioDuration)
+                try await MessageServiceImpl.shared.sendMediaMessage(to: channel, params: params)
+            } catch {
+                print("Failed to put image attachment url with data to database \(error)")
+            }
+        }
+    }
+    
+    private func sendVideoMessage(text: String, attachment: MediaAttachment) {
+        /// Upload Video URL to Storage
+        /// Upload the vide thumbnail
+        /// Store the metadata to our database
+        Task {
+            do {
+                let (videoURL, videoUploadProgress) = try await uploadFileToFirebase(for: .videoMessage, attachment: attachment)
+                let (imageURL, imageUploadProgress) = try await uploadImageToFirebase(attachment: attachment)
+                sendMediaAttachmentsToDatabase(channel: channel, text: text, for: .video(videoURL: videoURL), attachment: attachment, imageURL: imageURL, videoURL: videoURL)
+                clearTextInputArea()
+            } catch {
+                print("Failed to upload video message: \(error)")
+            }
+        }
+        
+    }
+    
+    private func sendVoiceMessage(text: String, attachment: MediaAttachment) {
+        Task {
+            do {
+                let (voiceMessageURL, voiceMessageUploadProgress) = try await uploadFileToFirebase(for: .voiceMessage, attachment: attachment)
+                sendMediaAttachmentsToDatabase(channel: channel, text: text, for: .audio(audioURL: voiceMessageURL), attachment: attachment, audioURL: voiceMessageURL, audioDuration: attachment.audioDuration)
+                clearTextInputArea()
+            } catch {
+                print("Failed to upload voice message: \(error)")
+            }
+        }
+    }
+    
+    private func uploadImageToFirebase(attachment: MediaAttachment) async throws -> (URL, Double) {
+        try await FirebaseHelper.uploadImage(image: attachment.thumbnail, for: .photoMessage)
+    }
+    
+    // used for uploading video and voice record messages.
+    private func uploadFileToFirebase(for type: UploadType, attachment: MediaAttachment) async throws -> (URL?, Double?) {
+        guard let fileToUploadURL = attachment.fileURL else { return (nil, nil) }
+        return try await FirebaseHelper.uploadFile(for: type, fileURL: fileToUploadURL)
+    }
+    
+    private func clearTextInputArea() {
+        selectedAttachments.removeAll()
+        photoPickerItems.removeAll()
+        messageText = ""
+        UIApplication.dismissKeyboard()
     }
     
     var cancellable: AnyCancellable?

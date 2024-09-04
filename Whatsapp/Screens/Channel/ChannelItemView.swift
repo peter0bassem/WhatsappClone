@@ -36,14 +36,14 @@ struct ChannelItemView: View {
             
             Spacer()
             
-            Text(channel.lastMessageTimestamp.toDate().dateOrTimeRepresentation)
+            Text((channel.lastMessageTimestamp ?? 0.0).toDate().dateOrTimeRepresentation)
                 .foregroundStyle(.gray)
                 .font(.system(size: 15))
         }
     }
     
     private func lastMessagePreview() -> some View {
-        Text(channel.lastMessage)
+        Text(channel.lastMessage.removeOptional)
             .font(.system(size: 16))
             .lineLimit(2)
             .foregroundStyle(.gray)

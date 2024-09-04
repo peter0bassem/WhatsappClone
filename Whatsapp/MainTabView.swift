@@ -12,10 +12,10 @@ struct MainTabView: View {
     
     var body: some View {
         TabView {
-            UpdatesTabScreen()
+            ChannelTabScreen()
                 .tabItem {
-                    Image(systemName: Tab.updates.icon)
-                    Text(Tab.updates.title)
+                    Image(systemName: Tab.chats.icon)
+                    Text(Tab.chats.title)
                 }
             
             CallTabScreen()
@@ -30,10 +30,10 @@ struct MainTabView: View {
                     Text(Tab.communities.title)
                 }
             
-            ChannelTabScreen()
+            UpdatesTabScreen()
                 .tabItem {
-                    Image(systemName: Tab.chats.icon)
-                    Text(Tab.chats.title)
+                    Image(systemName: Tab.updates.icon)
+                    Text(Tab.updates.title)
                 }
             
             SettingsTabScreen()

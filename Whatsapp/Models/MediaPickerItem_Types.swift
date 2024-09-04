@@ -48,6 +48,17 @@ struct MediaAttachment: Identifiable {
             return fileURL
         }
     }
+    
+    var audioDuration: TimeInterval? {
+        switch type {
+        case .photo(_):
+            return nil
+        case .video(_, _):
+            return nil
+        case .audio(_, let duration):
+            return duration
+        }
+    }
 }
 
 enum MediaAttachmentType: Equatable{

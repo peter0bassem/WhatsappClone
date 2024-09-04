@@ -36,6 +36,9 @@
 		FA24B1942C7F91D300B0A986 /* MediaPickerItem_Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24B1932C7F91D300B0A986 /* MediaPickerItem_Types.swift */; };
 		FA3A77872C7FBCD600B5239A /* MediaPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A77862C7FBCD600B5239A /* MediaPlayerView.swift */; };
 		FA424A772C7FACD200BC4FBE /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA424A762C7FACD100BC4FBE /* URL+Extensions.swift */; };
+		FA5855412C813ECD00028775 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5855402C813ECD00028775 /* FirebaseHelper.swift */; };
+		FA5855432C84F9BE00028775 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5855422C84F9BD00028775 /* UIApplication+Extensions.swift */; };
+		FA5855452C871DA900028775 /* UIWindowScene+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5855442C871DA900028775 /* UIWindowScene+Extensions.swift */; };
 		FA5D286A2C80BEB0005558E1 /* AudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5D28692C80BEB0005558E1 /* AudioRecorderService.swift */; };
 		FA8045ED2C7523DB005EB72B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045EC2C7523DB005EB72B /* Message.swift */; };
 		FA8045EF2C7524F1005EB72B /* BubbleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */; };
@@ -118,6 +121,9 @@
 		FA24B1932C7F91D300B0A986 /* MediaPickerItem_Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerItem_Types.swift; sourceTree = "<group>"; };
 		FA3A77862C7FBCD600B5239A /* MediaPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayerView.swift; sourceTree = "<group>"; };
 		FA424A762C7FACD100BC4FBE /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		FA5855402C813ECD00028775 /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
+		FA5855422C84F9BD00028775 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		FA5855442C871DA900028775 /* UIWindowScene+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindowScene+Extensions.swift"; sourceTree = "<group>"; };
 		FA5D28692C80BEB0005558E1 /* AudioRecorderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderService.swift; sourceTree = "<group>"; };
 		FA8045EC2C7523DB005EB72B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTextView.swift; sourceTree = "<group>"; };
@@ -271,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				FA8045F32C753510005EB72B /* CustomModifiers.swift */,
+				FA5855402C813ECD00028775 /* FirebaseHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -294,6 +301,8 @@
 				FABC367D2C7DEF1200BDCB30 /* Date+Extensions.swift */,
 				FA24B1912C7F8FCA00B0A986 /* PhotosPickerItem+Extensions.swift */,
 				FA424A762C7FACD100BC4FBE /* URL+Extensions.swift */,
+				FA5855422C84F9BD00028775 /* UIApplication+Extensions.swift */,
+				FA5855442C871DA900028775 /* UIWindowScene+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -528,6 +537,7 @@
 				FA121BAC2C77B7B600B2E5DC /* Constants.swift in Sources */,
 				FA121BC52C77FEE500B2E5DC /* LoginRequest.swift in Sources */,
 				FA121BB02C77C24500B2E5DC /* AuthButton.swift in Sources */,
+				FA5855452C871DA900028775 /* UIWindowScene+Extensions.swift in Sources */,
 				FABC468E2C740781008DA69B /* SettingsTabScreen.swift in Sources */,
 				FABC467E2C73EBBF008DA69B /* UpdatesTabScreen.swift in Sources */,
 				FABC46802C73F755008DA69B /* CallTabScreen.swift in Sources */,
@@ -562,6 +572,7 @@
 				FA121BC12C77F99300B2E5DC /* SettingsViewModel.swift in Sources */,
 				FA121BA12C77B40300B2E5DC /* LoginScreen.swift in Sources */,
 				FA121B9A2C77B1D100B2E5DC /* FirebaseManager.swift in Sources */,
+				FA5855432C84F9BE00028775 /* UIApplication+Extensions.swift in Sources */,
 				FA24B1942C7F91D300B0A986 /* MediaPickerItem_Types.swift in Sources */,
 				FA424A772C7FACD200BC4FBE /* URL+Extensions.swift in Sources */,
 				FA8045F62C761DB5005EB72B /* BubbleImageView.swift in Sources */,
@@ -573,6 +584,7 @@
 				FA8045ED2C7523DB005EB72B /* Message.swift in Sources */,
 				FABC46922C74092B008DA69B /* SettingsItem.swift in Sources */,
 				FA121BBD2C77F5E300B2E5DC /* RootScreen.swift in Sources */,
+				FA5855412C813ECD00028775 /* FirebaseHelper.swift in Sources */,
 				FA8045F42C753510005EB72B /* CustomModifiers.swift in Sources */,
 				FA8216B52C7B78EB005BE060 /* MessageService.swift in Sources */,
 				FA8045F82C778221005EB72B /* BubbleAudioView.swift in Sources */,
