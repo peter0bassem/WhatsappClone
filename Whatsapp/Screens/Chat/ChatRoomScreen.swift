@@ -61,38 +61,12 @@ struct ChatRoomScreen: View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack {
-                    ForEach(chatViewModel.messages) { messageItem in
-                        switch messageItem.type {
-                        case .text:
-                            BubbleTextView(item: messageItem)
-                                .id(messageItem)
-                                .environmentObject(voiceMessagePlayer)
-                        case .photo, .video:
-                            BubbleImageView(item: messageItem, chatActionObserver: chatViewModel.chatActionObserver)
-                                .id(messageItem)
-                                .environmentObject(voiceMessagePlayer)
-                        case .audio:
-                            BubbleAudioView(item: messageItem, chatActionObserver: chatViewModel.chatActionObserver)
-                                .id(messageItem)
-                                .environmentObject(voiceMessagePlayer)
-                        case .admin(let adminType):
-                            switch adminType {
-                            case .channelCreation:
-                                ChannelCreationTextView()
-                                    .padding(.bottom, 5)
-                                    .id(messageItem)
-                                    .environmentObject(voiceMessagePlayer)
-                                if channel.isGroupChat {
-                                    AdminMessageTextView(channel: channel)
-                                        .padding(.bottom, 5)
-                                        .id(messageItem)
-                                        .environmentObject(voiceMessagePlayer)
-                                }
-                            default:
-                                Text("UNKNOWN")
-                            }
-                        default: EmptyView()
-                        }
+//                    ForEach(chatViewModel.messages) { messageItem in
+                    ForEach(Array(chatViewModel.messages.enumerated()), id: \.element.id) { index, messageItem in
+                        BubbleView(message: messageItem, channel: channel, isNewDay: chatViewModel.isMessageNewDay(for: messageItem, atIndex: index))
+                            .id(messageItem)
+                            .environmentObject(chatViewModel)
+                            .environmentObject(voiceMessagePlayer)
                     }
                 }
                 .padding(.horizontal, 10)
@@ -131,11 +105,9 @@ struct ChatRoomScreen: View {
                 hideToolbar = false
             }
             .onChange(of: chatViewModel.messages) { _ in
-                print("chatViewModel.messages: \(chatViewModel.messages.count)")
                 scrollToLastMessage(proxy: proxy)
             }
             .onChange(of: keyboardObserver.isKeyboardVisible) { _ in
-                print("chatViewModel.messages: \(chatViewModel.messages.count)")
                 scrollToLastMessage(proxy: proxy)
             }
             .simultaneousGesture(

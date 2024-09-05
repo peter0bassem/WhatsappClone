@@ -346,6 +346,12 @@ final class ChatViewModel: ObservableObject {
         videoPlayerState.player = nil
         videoPlayerState.show = false
     }
+    
+    func isMessageNewDay(for message: Message, atIndex index: Int) -> Bool {
+        let priorIndex = max(0, (index - 1))
+        let priorMessage = messages[priorIndex]
+        return !message.timestamp.removeOptional.toDate().isSameDay(as: priorMessage.timestamp.removeOptional.toDate())
+    }
 }
 
 extension Array {

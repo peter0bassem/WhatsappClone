@@ -19,6 +19,7 @@ struct AdminMessageTextView: View {
                 textView("\(channel.creatorName) add you.")
             }
         }
+        .frame(maxWidth: .infinity)
         .task {
             isChannelCreatedByMe = await channel.isCreatedByMe
         }

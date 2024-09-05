@@ -66,6 +66,7 @@
 		FA8216C12C7D9C04005BE060 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FA8216C02C7D9C04005BE060 /* Kingfisher */; };
 		FA8216C32C7D9C66005BE060 /* CircleProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216C22C7D9C66005BE060 /* CircleProfileImageView.swift */; };
 		FAAEF6592C89C12C007C1C93 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAEF6582C89C12C007C1C93 /* Haptics.swift */; };
+		FAAEF65B2C89E00B007C1C93 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAEF65A2C89E00B007C1C93 /* BubbleView.swift */; };
 		FABC367E2C7DEF1200BDCB30 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC367D2C7DEF1200BDCB30 /* Date+Extensions.swift */; };
 		FABC36A02C7F5A3000BDCB30 /* MediaAttachmentPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC369F2C7F5A3000BDCB30 /* MediaAttachmentPreviewView.swift */; };
 		FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */; };
@@ -152,6 +153,7 @@
 		FA8216BD2C7D6C4F005BE060 /* AdminMessageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMessageTextView.swift; sourceTree = "<group>"; };
 		FA8216C22C7D9C66005BE060 /* CircleProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImageView.swift; sourceTree = "<group>"; };
 		FAAEF6582C89C12C007C1C93 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
+		FAAEF65A2C89E00B007C1C93 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
 		FABC367D2C7DEF1200BDCB30 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		FABC369F2C7F5A3000BDCB30 /* MediaAttachmentPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaAttachmentPreviewView.swift; sourceTree = "<group>"; };
 		FABC466A2C73E2D4008DA69B /* Whatsapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whatsapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -440,6 +442,7 @@
 				FABC46962C7410A8008DA69B /* TextInputAreaView.swift */,
 				FABC46982C74D95E008DA69B /* MessageListViewController.swift */,
 				FABC469A2C74DB22008DA69B /* MessageListView.swift */,
+				FAAEF65A2C89E00B007C1C93 /* BubbleView.swift */,
 				FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */,
 				FA8045F52C761DB5005EB72B /* BubbleImageView.swift */,
 				FA8045F72C778221005EB72B /* BubbleAudioView.swift */,
@@ -601,6 +604,7 @@
 				FA8216A82C7A6F0D005BE060 /* ChannelViewModel.swift in Sources */,
 				FA8216992C78C3CD005BE060 /* SelectedChatPartnerView.swift in Sources */,
 				FABC46972C7410A8008DA69B /* TextInputAreaView.swift in Sources */,
+				FAAEF65B2C89E00B007C1C93 /* BubbleView.swift in Sources */,
 				FABC36A02C7F5A3000BDCB30 /* MediaAttachmentPreviewView.swift in Sources */,
 				FA8216AB2C7A77C9005BE060 /* String+Extensions.swift in Sources */,
 				FABC46992C74D95E008DA69B /* MessageListViewController.swift in Sources */,
