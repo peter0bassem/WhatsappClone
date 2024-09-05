@@ -39,6 +39,7 @@
 		FA5855412C813ECD00028775 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5855402C813ECD00028775 /* FirebaseHelper.swift */; };
 		FA5855432C84F9BE00028775 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5855422C84F9BD00028775 /* UIApplication+Extensions.swift */; };
 		FA5855452C871DA900028775 /* UIWindowScene+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5855442C871DA900028775 /* UIWindowScene+Extensions.swift */; };
+		FA5855472C87E83C00028775 /* VoiceMessagePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5855462C87E83C00028775 /* VoiceMessagePlayer.swift */; };
 		FA5D286A2C80BEB0005558E1 /* AudioRecorderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5D28692C80BEB0005558E1 /* AudioRecorderService.swift */; };
 		FA8045ED2C7523DB005EB72B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045EC2C7523DB005EB72B /* Message.swift */; };
 		FA8045EF2C7524F1005EB72B /* BubbleTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */; };
@@ -64,6 +65,7 @@
 		FA8216BE2C7D6C4F005BE060 /* AdminMessageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216BD2C7D6C4F005BE060 /* AdminMessageTextView.swift */; };
 		FA8216C12C7D9C04005BE060 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FA8216C02C7D9C04005BE060 /* Kingfisher */; };
 		FA8216C32C7D9C66005BE060 /* CircleProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8216C22C7D9C66005BE060 /* CircleProfileImageView.swift */; };
+		FAAEF6592C89C12C007C1C93 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAEF6582C89C12C007C1C93 /* Haptics.swift */; };
 		FABC367E2C7DEF1200BDCB30 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC367D2C7DEF1200BDCB30 /* Date+Extensions.swift */; };
 		FABC36A02C7F5A3000BDCB30 /* MediaAttachmentPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC369F2C7F5A3000BDCB30 /* MediaAttachmentPreviewView.swift */; };
 		FABC466E2C73E2D4008DA69B /* WhatsappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABC466D2C73E2D4008DA69B /* WhatsappApp.swift */; };
@@ -124,6 +126,7 @@
 		FA5855402C813ECD00028775 /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		FA5855422C84F9BD00028775 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		FA5855442C871DA900028775 /* UIWindowScene+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindowScene+Extensions.swift"; sourceTree = "<group>"; };
+		FA5855462C87E83C00028775 /* VoiceMessagePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMessagePlayer.swift; sourceTree = "<group>"; };
 		FA5D28692C80BEB0005558E1 /* AudioRecorderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderService.swift; sourceTree = "<group>"; };
 		FA8045EC2C7523DB005EB72B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		FA8045EE2C7524F1005EB72B /* BubbleTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTextView.swift; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 		FA8216B92C7D6988005BE060 /* ChannelCreationTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCreationTextView.swift; sourceTree = "<group>"; };
 		FA8216BD2C7D6C4F005BE060 /* AdminMessageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMessageTextView.swift; sourceTree = "<group>"; };
 		FA8216C22C7D9C66005BE060 /* CircleProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProfileImageView.swift; sourceTree = "<group>"; };
+		FAAEF6582C89C12C007C1C93 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		FABC367D2C7DEF1200BDCB30 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		FABC369F2C7F5A3000BDCB30 /* MediaAttachmentPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaAttachmentPreviewView.swift; sourceTree = "<group>"; };
 		FABC466A2C73E2D4008DA69B /* Whatsapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Whatsapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -247,6 +251,7 @@
 			children = (
 				FA8216B82C7BE276005BE060 /* FirebaseServices */,
 				FA5D28692C80BEB0005558E1 /* AudioRecorderService.swift */,
+				FA5855462C87E83C00028775 /* VoiceMessagePlayer.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 			children = (
 				FA8045F32C753510005EB72B /* CustomModifiers.swift */,
 				FA5855402C813ECD00028775 /* FirebaseHelper.swift */,
+				FAAEF6582C89C12C007C1C93 /* Haptics.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -546,6 +552,7 @@
 				FABC468A2C740115008DA69B /* ChannelTabScreen.swift in Sources */,
 				FABC367E2C7DEF1200BDCB30 /* Date+Extensions.swift in Sources */,
 				FA8216AF2C7A7955005BE060 /* ChannelService.swift in Sources */,
+				FA5855472C87E83C00028775 /* VoiceMessagePlayer.swift in Sources */,
 				FA8216AD2C7A7936005BE060 /* ChannelFirebaseManager.swift in Sources */,
 				FA121BCF2C78B50B00B2E5DC /* GroupPartnerPickerScreen.swift in Sources */,
 				FA121BAE2C77B9E400B2E5DC /* AuthTextField.swift in Sources */,
@@ -560,6 +567,7 @@
 				FA8216BE2C7D6C4F005BE060 /* AdminMessageTextView.swift in Sources */,
 				FA121BB22C77CBB700B2E5DC /* SignUpScreen.swift in Sources */,
 				FA82169B2C78C9E3005BE060 /* GroupSetupScreen.swift in Sources */,
+				FAAEF6592C89C12C007C1C93 /* Haptics.swift in Sources */,
 				FA8216A02C78D96C005BE060 /* AuthFirebaseManager.swift in Sources */,
 				FA121BCB2C78ABA300B2E5DC /* ChatPartnerRowView.swift in Sources */,
 				FA121BB72C77D25A00B2E5DC /* AuthProviderService.swift in Sources */,

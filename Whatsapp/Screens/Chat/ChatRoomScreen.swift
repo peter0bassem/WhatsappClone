@@ -50,6 +50,7 @@ struct ChatRoomScreen: View {
     @State private var circleProfileImageView = CircleProfileImageView(profileImageUrl: nil, size: .medium)
     
     @StateObject private var keyboardObserver = KeyboardObserver()
+    @StateObject private var voiceMessagePlayer = VoiceMessagePlayer()
     
     init(channel: Channel) {
         self.channel = channel
@@ -65,22 +66,27 @@ struct ChatRoomScreen: View {
                         case .text:
                             BubbleTextView(item: messageItem)
                                 .id(messageItem)
+                                .environmentObject(voiceMessagePlayer)
                         case .photo, .video:
                             BubbleImageView(item: messageItem, chatActionObserver: chatViewModel.chatActionObserver)
                                 .id(messageItem)
+                                .environmentObject(voiceMessagePlayer)
                         case .audio:
                             BubbleAudioView(item: messageItem, chatActionObserver: chatViewModel.chatActionObserver)
                                 .id(messageItem)
+                                .environmentObject(voiceMessagePlayer)
                         case .admin(let adminType):
                             switch adminType {
                             case .channelCreation:
                                 ChannelCreationTextView()
                                     .padding(.bottom, 5)
                                     .id(messageItem)
+                                    .environmentObject(voiceMessagePlayer)
                                 if channel.isGroupChat {
                                     AdminMessageTextView(channel: channel)
                                         .padding(.bottom, 5)
                                         .id(messageItem)
+                                        .environmentObject(voiceMessagePlayer)
                                 }
                             default:
                                 Text("UNKNOWN")
@@ -138,6 +144,9 @@ struct ChatRoomScreen: View {
                         UIApplication.dismissKeyboard()
                     }
             )
+            .refreshable(action: {
+                print("Should refresh data")
+            })
             .fullScreenCover(isPresented: $chatViewModel.videoPlayerState.show) {
                 if let player = chatViewModel.videoPlayerState.player {
                     MediaPlayerView(player: player ) {
